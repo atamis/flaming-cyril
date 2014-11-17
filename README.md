@@ -1,0 +1,4 @@
+flaming-cyril
+=============
+
+Checkers heuristics
