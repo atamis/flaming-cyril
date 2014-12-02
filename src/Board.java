@@ -1,47 +1,71 @@
 package grouplab;
 
-/**
- * Basic board constructor class used for a game of checkers (Draughts)
- * 
- * @author Nick Care
- * @author Andrew Amis
- * @author Gabe Appleby
- * @author Sam Goree
- */
+import java.util.Hashtable;
 
 public class Board {
-  int x, y = 0;
-  
-  // constructs a board with a bounds height and width
-  public Board(int height, int width) {
-    x = height;
-    y = width;
-  }
-  
-  // constructs a copy of a Board b
-  public Board(Board b) {
-  
-  }
-  
-  public enum PIECE {
-    WHITE_PAWN,
-    WHITE_KING,
-    BLACK_PAWN,
-    BLACK_KING;
-  }
-  
-  // internal class to hold details about tiles on the board
-  public class Tile() {
-  
-  }
-  
-  public boolean gameOver() {
-    
-  }
-  
-  // returns a string based form of a Board
-  public String toString() {
-    return "";
-  }
-  
+	Hashtable<Integer, Integer> store;
+	int size = 0;
+	
+	// creates a standard checkers board of dimension 8
+	public Board() {
+		store = new Hashtable<Integer, Integer>(8*8);
+	}
+	
+	// creates a checkers board of dimension size
+	public Board(int s) {
+		size = s;
+		store = new Hashtable<Integer, Integer>(s*s);
+	}
+	
+	// creates a clone of board b
+	public Board(Board b) {
+		store = b.store;
+		size = b.size;
+	}
+	
+	// method to convert coordinate into human readable format
+	public int convertCoord(String coord) {
+		if (coord.length() > 2) {
+			System.out.printf("Invalid coordinate format (%s)!", coord);
+		}
+		// TODO
+		return 0;
+	}
+	
+	// converts x, y coords to board index
+	public int convertCoord(int x, int y) {
+		return (x + (y * size));
+	}
+	
+	// places a piece with id at index
+	public void setPiece(int index, int id) {
+		if (store.get(index) != 0) {
+			System.out.printf("Piece already exists at %d!", index);
+			return;
+		}
+		store.put(index, id);
+	}
+	
+	// get the piece at a given location
+	public int pieceAt(int index) {
+		return store.get(index);
+	}
+	
+	// prints the board to stdout
+	public void show() {
+		// TODO
+	}
+	
+	// clears all pieces from the board
+	public void clear() {
+		for (int i = 0; i < size; i++) {
+			store.put(i, 0);
+		}
+	}
+	
+	// tests if two boards are equal
+	@Override
+	public boolean equals(Object o) {
+		return false;
+	}
 }
