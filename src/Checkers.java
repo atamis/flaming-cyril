@@ -139,7 +139,7 @@ public class Checkers {
 	}
 	
 	// applies a move to the current board.
-	public Board applyMove(Board b, Move m, Side s) {
+	public static Board applyMove(Board b, Move m, Side s) {
 		Board result = new Board(b);
 		
 		if (s == Side.BLACK) {
