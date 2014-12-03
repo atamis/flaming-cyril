@@ -16,9 +16,28 @@ import java.util.List;
 
 public class Checkers {
 	
+	int[] redDirection = { 1, 2 };
+	int[] blkDirection = { 3, 4 };
+	int[] kingDirection = { 1, 2, 3, 4 };
+	
+	public int[] getDirections(int id) {
+		switch (id) {
+		case(1):
+			return blkDirection;
+		case(2):
+			return redDirection;
+		case(3):
+		case(4):
+			return kingDirection;
+		}
+		return null;
+	}
+	
 	public static enum Player {
 		BLACK,
 		RED;
+		
+		
 	}
 
 	public class Move {
@@ -81,7 +100,6 @@ public class Checkers {
 		}
 	}
 	
-	// TODO
 	// get a legal moves for a player
 	public List<Move> getLegalMoves(Board b, Player p) {
 		List<Move> result = new LinkedList<Move>();
@@ -94,7 +112,7 @@ public class Checkers {
 				if (ownsPiece(b, coord, p)) {
 					// TODO
 					// handle piece direction options e.g. pawns vs. kings, red vs. black
-					for (int dir = 0; dir < 4; dir++) {
+					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
 						
 						// test if a jump can be made
