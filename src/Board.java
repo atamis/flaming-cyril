@@ -23,15 +23,6 @@ public class Board {
 		size = b.size;
 	}
 	
-	// method to convert coordinate into human readable format
-	public int convertCoord(String coord) {
-		if (coord.length() > 2) {
-			System.out.printf("Invalid coordinate format (%s)!", coord);
-		}
-		// TODO
-		return 0;
-	}
-	
 	// converts x, y coords to board index
 	public int convertCoord(int x, int y) {
 		return (x + (y * size));
@@ -46,31 +37,35 @@ public class Board {
 		store.put(index, id);
 	}
 	
-	// detects if a piece is on the last row
-	public boolean onLastRow(int index) {
-		return false;
-	}
-	
-	// detects if a piece is on the first row
-	public boolean onFirstRow(int index) {
-		return false;
-	}
-	
-	// detects if a piece is on the first column
-	public boolean onFirstCol(int index) {
-		return false;
-	}
-	
-	// detects if a piece is on the last column
-	public boolean onLastCol(int index) {
-		return false;
-	}
-
 	// get the piece at a given location
 	public int pieceAt(int index) {
 		return store.get(index);
 	}
 	
+	// detects if a piece is on the last row
+	public boolean onLastRow(int index) {
+		// TODO
+		return false;
+	}
+	
+	// detects if a piece is on the first row
+	public boolean onFirstRow(int index) { 
+		// TODO
+		return false;
+	}
+	
+	// detects if a piece is on the first column
+	public boolean onFirstCol(int index) {
+		// TODO
+		return false;
+	}
+	
+	// detects if a piece is on the last column
+	public boolean onLastCol(int index) {
+		// TODO
+		return false;
+	}
+
 	// prints the board to stdout
 	public void show() {
 		// TODO
@@ -83,6 +78,7 @@ public class Board {
 		}
 	}
 	
+	// TODO
 	// tests if two boards are equal
 	@Override
 	public boolean equals(Object o) {

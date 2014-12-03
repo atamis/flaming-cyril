@@ -33,11 +33,9 @@ public class Checkers {
 		return null;
 	}
 	
-	public static enum Player {
+	public static enum Side {
 		BLACK,
-		RED;
-		
-		
+		RED;		
 	}
 
 	public class Move {
@@ -56,13 +54,13 @@ public class Checkers {
 	}
 	
 	// tests if a player owns a piece at a specific index
-	public boolean ownsPiece(Board b, int index, Player p) {
+	public boolean ownsPiece(Board b, int index, Side p) {
 		int piece = b.pieceAt(index);
 		if (piece == 0) {
 			System.out.printf("There isn't even a piece on tile %d!", index);
 			return false;
 		}
-		if (p == Player.BLACK) {
+		if (p == Side.BLACK) {
 			if ((piece == 1) || (piece == 2))
 				return true;
 			return false;
@@ -101,7 +99,7 @@ public class Checkers {
 	}
 	
 	// get a legal moves for a player
-	public List<Move> getLegalMoves(Board b, Player p) {
+	public List<Move> getLegalMoves(Board b, Side p) {
 		List<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
 		
@@ -141,17 +139,17 @@ public class Checkers {
 	}
 	
 	// applies a move to the current board.
-	public Board applyMove(Board b, Move m, Player p) {
+	public Board applyMove(Board b, Move m, Side s) {
 		Board result = new Board(b);
 		
-		if (p == Player.BLACK) {
+		if (s == Side.BLACK) {
 			if ((b.pieceAt(m.o) == 1) && (b.onLastRow(m.d) == true)) {
 				result.setPiece(m.d, 2);
 				// indicate end of turn
 			} else {
 				result.setPiece(m.d, b.pieceAt(m.o));
 			}
-		} else if (p == Player.RED) {
+		} else if (s == Side.RED) {
 			if ((b.pieceAt(m.o) == 3) && (b.onFirstRow(m.d) == true)) {
 				result.setPiece(m.d, 4);
 				// indicate end of turn
@@ -174,15 +172,10 @@ public class Checkers {
 	}
 	
 	// tests if a given board state is a winning board state
-	public boolean isWin(Board b, Player p) {
-		if (getLegalMoves(b, p).size() > 0)
+	public boolean isWin(Board b, Side s) {
+		if (getLegalMoves(b, s).size() > 0)
 			return false;
 		return true;
-	}
-
-	// initial set up of the board
-	public void init() {
-		
 	}
 	
 	// sets up the initial board state
@@ -193,7 +186,6 @@ public class Checkers {
 			for (int c=0; c < 8; c++) {
 				if (r % 2 == 0) {
 					if (c % 2 != 0) b.setPiece(b.convertCoord(c, r), 1);
-				
 				} else {
 					if (c % 2 == 0) b.setPiece(b.convertCoord(c, r), 1);
 				}	
@@ -214,8 +206,17 @@ public class Checkers {
 	
 	// TODO
 	// plays a game of checkers
-	public void play() {
-
+	public void play(Player player1, Player p2) {
+		boolean gameover = false;
+		Board board = setup();
+		Player plyr = player1;
+		
+		while (!gameover) {
+			if (isWin(board, Side.BLACK)) { // not working
+				gameover = true;
+				System.out.printf("%s wins!", plyr.getName());
+			}
+		}
 		// TODO
 		// check if a move takes a piece - if it does recurse
 	}

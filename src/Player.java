@@ -8,4 +8,6 @@ public interface Player {
 	// asks the player for a move
 	public abstract Move queryMove(Board b, LinkedList<Move> moves);
 	
+	// the player's name
+	public abstract String getName();
 }
