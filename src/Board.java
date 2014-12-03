@@ -46,6 +46,26 @@ public class Board {
 		store.put(index, id);
 	}
 	
+	// detects if a piece is on the last row
+	public boolean onLastRow(int index) {
+		return false;
+	}
+	
+	// detects if a piece is on the first row
+	public boolean onFirstRow(int index) {
+		return false;
+	}
+	
+	// detects if a piece is on the first column
+	public boolean onFirstCol(int index) {
+		return false;
+	}
+	
+	// detects if a piece is on the last column
+	public boolean onLastCol(int index) {
+		return false;
+	}
+
 	// get the piece at a given location
 	public int pieceAt(int index) {
 		return store.get(index);
