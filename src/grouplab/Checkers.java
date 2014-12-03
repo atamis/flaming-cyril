@@ -16,11 +16,11 @@ import java.util.List;
 
 public class Checkers {
 	
-	int[] redDirection = { 1, 2 };
-	int[] blkDirection = { 3, 4 };
-	int[] kingDirection = { 1, 2, 3, 4 };
+	static int[] redDirection = { 1, 2 };
+	static int[] blkDirection = { 3, 4 };
+	static int[] kingDirection = { 1, 2, 3, 4 };
 	
-	public int[] getDirections(int id) {
+	public static int[] getDirections(int id) {
 		switch (id) {
 		case(1):
 			return blkDirection;
@@ -54,7 +54,7 @@ public class Checkers {
 	}
 	
 	// tests if a player owns a piece at a specific index
-	public boolean ownsPiece(Board b, int index, Side p) {
+	public static boolean ownsPiece(Board b, int index, Side p) {
 		int piece = b.pieceAt(index);
 		if (piece == 0) {
 			System.out.printf("There isn't even a piece on tile %d!", index);
@@ -72,7 +72,7 @@ public class Checkers {
 	}
 	
 	// gets tile in specified direction
-	public int getAdjacent(Board b, int index, int direction) {
+	public static int getAdjacent(Board b, int index, int direction) {
 		if ((index < 0) || (index > b.size))
 			System.out.printf("Index out of bounds: %d", direction);
 		switch(direction) {
@@ -99,7 +99,7 @@ public class Checkers {
 	}
 	
 	// get a legal moves for a player
-	public List<Move> getLegalMoves(Board b, Side p) {
+	public static List<Move> getLegalMoves(Board b, Side p) {
 		List<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
 		
