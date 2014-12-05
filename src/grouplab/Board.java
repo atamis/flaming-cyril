@@ -3,13 +3,8 @@ package grouplab;
 import java.util.ArrayList;
 
 public class Board {
-<<<<<<< HEAD
 	ArrayList<Integer> store;
-	int size = 0;
-=======
-	Hashtable<Integer, Integer> store;
 	public int size = 0;
->>>>>>> origin/master
 	
 	// creates a standard checkers board of dimension 8
 	public Board() {
