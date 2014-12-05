@@ -40,7 +40,7 @@ public class Game {
 			//case 3: p1 = new Andrew thing();
 		}
 
-		System.out.println("Would you like player one to be: (1) Human, (2) Min-Max, (3) Andrew"); //Which type of player
+		System.out.println("Would you like player two to be: (1) Human, (2) Min-Max, (3) Andrew"); //Which type of player
 		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
 		playerTwoSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Grab the input, then make sure its not wrong
 
