@@ -45,7 +45,7 @@ public class Checkers {
 	public static boolean ownsPiece(Board b, int index, Side p) {
 		int piece = b.pieceAt(index);
 		if (piece == 0) {
-			System.out.printf("There isn't even a piece on tile %d!", index);
+			System.out.printf("There isn't even a piece on tile %d!\n", index);
 			return false;
 		}
 		if (p == Side.BLACK) {
@@ -62,7 +62,7 @@ public class Checkers {
 	// gets tile in specified direction
 	public static int getAdjacent(Board b, int index, int direction) {
 		if ((index < 0) || (index > b.size))
-			System.out.printf("Index out of bounds: %d", direction);
+			System.out.printf("Index out of bounds: %d\n", direction);
 		switch(direction) {
 		case(0):
 			if  ((b.onFirstRow(index) == true)  || (b.onFirstCol(index) == true))
@@ -81,7 +81,7 @@ public class Checkers {
 				return -1;
 			return direction + (b.size + 1);
 		default:
-			System.out.printf("%d is not a valid direction!", direction);
+			System.out.printf("%d is not a valid direction!\n", direction);
 			return -1;
 		}
 	}
@@ -98,24 +98,25 @@ public class Checkers {
 				if (ownsPiece(b, coord, p)) {
 					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
-						
-						// test if a jump can be made
-						if ((b.pieceAt(adj) != 0) && (ownsPiece(b, adj, p) == false)) {
-							int adj2 = getAdjacent(b, adj, dir);
-							// index out of bounds
-							if (adj2 == -1) {
-								continue;
-							} else if (b.pieceAt(adj2) == 0) {
-								// delete any non-jumps
-								for (Move m : result) {
-									if (m.length() == 1)
-										result.remove(m);
+						if(adj != -1){
+							// test if a jump can be made
+							if ((b.pieceAt(adj) != 0) && (ownsPiece(b, adj, p) == false)) {
+								int adj2 = getAdjacent(b, adj, dir);
+								// index out of bounds
+								if (adj2 == -1) {
+									continue;
+								} else if (b.pieceAt(adj2) == 0) {
+									// delete any non-jumps
+									for (Move m : result) {
+										if (m.length() == 1)
+											result.remove(m);
+									}
+									result.add(new Move(coord, adj2));
+									canJump = true;
 								}
-								result.add(new Move(coord, adj2));
-								canJump = true;
+							} else if ((b.pieceAt(adj) == 0) && (canJump == false)) { 
+								result.add(new Move(coord, adj));	
 							}
-						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) { 
-							result.add(new Move(coord, adj));	
 						}
 					}
 				}	
@@ -200,7 +201,7 @@ public class Checkers {
         while (!gameover) {
             if (isWin(board, current)) { // not working
                 gameover = true;
-                System.out.printf("%s wins!", plyr.getName());
+                System.out.printf("%s wins!\n", plyr.getName());
             }
             
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
