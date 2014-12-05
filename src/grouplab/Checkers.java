@@ -220,5 +220,4 @@ public class Checkers {
             
         }
     }
->>>>>>> e35ad680ac2208fe4134d9e68c5b683c323a2e94
 }
