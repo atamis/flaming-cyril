@@ -38,7 +38,7 @@ public abstract class ComputerPlayer implements Player{
 					best = eval;
 				}
 			}else{
-				//evaluta
+				//evaluate
 				eval = alphabeta(Checkers.applyMove(b, m, s), DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, s);
 				if(eval <= best){
 					bestMove = m;
