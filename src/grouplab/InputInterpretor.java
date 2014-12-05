@@ -2,6 +2,9 @@ package grouplab;
 
 public class InputInterpretor {
     
+    public static final int MIN_PLAYER_TYPE = 1;  //The minimum valid player selection
+    public static final int MAX_PLAYER_TYPE = 3;  //The maximum valid player selection
+
     public InputInterpretor() {
         
     }
@@ -30,13 +33,13 @@ public class InputInterpretor {
         
         
         if ((length != 3) || (comma != ",")) { //If the length of the arguements is not 3, and the second arguement is not ','
-            return -1; //Failure condition
+            return -1; //Return fail
         }
         
         
         try { //Try to turn the first and second argument into integers
-            tempX = Integer.parseInt(tempXS, 10);
-            tempY = Integer.parseInt(tempYS, 10);
+            tempX = Integer.parseInt(tempXS, 10); //10 means base 10
+            tempY = Integer.parseInt(tempYS, 10); //10 means base 10
         } catch (NumberFormatException e) {
             return -1; //Return fail;
         }
@@ -49,6 +52,18 @@ public class InputInterpretor {
         coord = b.convertCoord(tempX, tempY); //The coordinates to return
         
         return coord; //return the coordinates
+    }
+
+
+    //Takes in an integer for player selection and makes sure its valid
+    //Returns the number if valid, and -1 if invalid
+    public int intToPlayer(int playerSelection) {
+        if ((playerSelection < MIN_PLAYER_TYPE) || (playerSelection > MAX_PLAYER_TYPE)) {
+            return -1; //Return fail
+        }
+        else {
+            return playerSelection; //Return valid selection
+        }
     }
 
 }
