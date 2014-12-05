@@ -189,21 +189,34 @@ public class Checkers {
 		return b;
 	}
 	
-	// TODO
-	// plays a game of checkers
-	public static void play(Player player1, Player p2) {
-		boolean gameover = false;
-		Board board = setup();
-		Player plyr = player1;
-		
-		while (!gameover) {
-			if (isWin(board, Side.BLACK)) { // not working
-				gameover = true;
-				System.out.printf("%s wins!", plyr.getName());
-			}
-			
-		}
-		// TODO
-		// check if a move takes a piece - if it does recurse
-	}
+    // plays a game of checkers
+    public void play(Player player1, Player player2) {
+        boolean gameover = false;
+        Board board = setup();
+        Player plyr = player1;
+        Side current = Side.BLACK;
+        
+        while (!gameover) {
+            if (isWin(board, current)) { // not working
+                gameover = true;
+                System.out.printf("%s wins!", plyr.getName());
+            }
+            
+            Move m = plyr.queryMove(board, getLegalMoves(board, current));
+            
+            board = applyMove(board, m, current);
+            
+            // TODO
+            // still need to check if a move takes a piece
+            
+            current = current.opponent();
+            
+            if (plyr == player1) {
+                plyr = player2;
+            } else {
+                plyr = player1; 
+            }
+            
+        }
+    }
 }
