@@ -42,27 +42,31 @@ public class Board {
 		return store.get(index);
 	}
 	
-	// detects if a piece is on the last row
-	public boolean onLastRow(int index) {
-		// TODO
-		return false;
-	}
-	
-	// detects if a piece is on the first row
-	public boolean onFirstRow(int index) { 
-		// TODO
+	// detects if a piece is on the last column
+	public boolean onLastCol(int index) {
+		if ((index + 1) % size == 0)
+			return true;
 		return false;
 	}
 	
 	// detects if a piece is on the first column
-	public boolean onFirstCol(int index) {
-		// TODO
+	public boolean onFirstCol(int index) { 
+		if ((index == 0) or (index % size == 0))
+			return true;
 		return false;
 	}
 	
-	// detects if a piece is on the last column
-	public boolean onLastCol(int index) {
-		// TODO
+	// detects if a piece is on the first row
+	public boolean onFirstRow(int index) {
+		if (index < size)
+			return true;
+		return false;
+	}
+	
+	// detects if a piece is on the last row
+	public boolean onLastRowint index) {	
+		if ((index < Math.pow(size, 2) - size))
+			return true;
 		return false;
 	}
 
