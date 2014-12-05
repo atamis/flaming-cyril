@@ -37,21 +37,6 @@ public class Checkers {
 		BLACK,
 		RED;		
 	}
-
-	public class Move {
-		int o = -1; int d = -1;
-		
-		public Move(int origin, int dest) {
-			o = origin;
-			d = dest;
-		}
-		
-		public int length() {
-			if (Math.abs(o - d - 8) > 1)
-				return 2;
-			return 1;
-		}
-	}
 	
 	// tests if a player owns a piece at a specific index
 	public static boolean ownsPiece(Board b, int index, Side p) {
@@ -172,14 +157,14 @@ public class Checkers {
 	}
 	
 	// tests if a given board state is a winning board state
-	public boolean isWin(Board b, Side s) {
+	public static boolean isWin(Board b, Side s) {
 		if (getLegalMoves(b, s).size() > 0)
 			return false;
 		return true;
 	}
 	
 	// sets up the initial board state
-	public Board setup() {
+	public static Board setup() {
 		Board b = new Board(8);
 		// Black pieces
 		for (int r=0; r < 3; r++) {
@@ -206,7 +191,7 @@ public class Checkers {
 	
 	// TODO
 	// plays a game of checkers
-	public void play(Player player1, Player p2) {
+	public static void play(Player player1, Player p2) {
 		boolean gameover = false;
 		Board board = setup();
 		Player plyr = player1;
@@ -216,6 +201,7 @@ public class Checkers {
 				gameover = true;
 				System.out.printf("%s wins!", plyr.getName());
 			}
+			
 		}
 		// TODO
 		// check if a move takes a piece - if it does recurse

@@ -4,7 +4,7 @@ package grouplab;
 import java.util.List;
 import java.util.LinkedList;
 
-import grouplab.Checkers.Move;
+import grouplab.Checkers;
 import grouplab.Checkers.Side;
 
 

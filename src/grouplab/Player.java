@@ -1,6 +1,6 @@
 package grouplab;
 
-import grouplab.Checkers.Move;
+import grouplab.Checkers;
 
 import java.util.LinkedList;
 
