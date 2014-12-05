@@ -1,7 +1,5 @@
 package grouplab;
 
-import java.awt.Point;
-
 public class InputInterpretor {
     
     public InputInterpretor() {

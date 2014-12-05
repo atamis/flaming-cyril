@@ -9,7 +9,7 @@ public class HumanPlayer implements Player {
         
     }
     //Takes in a board and list of moves and returns a move
-    public Move queryMove(Board b, LinkedList moves) {
+    public Move queryMove(Board b, LinkedList<Move> moves) {
         int origin; //Where the piece started
         int dest; //Where it wants to go
         Scanner humanInput; //A scanner to grab input

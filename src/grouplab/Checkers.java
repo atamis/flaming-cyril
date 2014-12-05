@@ -1,7 +1,6 @@
 package grouplab;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * default implementation of checkers
@@ -35,7 +34,11 @@ public class Checkers {
 	
 	public static enum Side {
 		BLACK,
-		RED;		
+		RED;
+		
+		public Side opponent() {
+			return values()[(1 - ordinal())];
+		}
 	}
 	
 	// tests if a player owns a piece at a specific index
@@ -84,8 +87,8 @@ public class Checkers {
 	}
 	
 	// get a legal moves for a player
-	public static List<Move> getLegalMoves(Board b, Side p) {
-		List<Move> result = new LinkedList<Move>();
+	public static LinkedList<Move> getLegalMoves(Board b, Side p) {
+		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
 		
 		for (int x = 0; x < 8; x++) {
@@ -93,8 +96,6 @@ public class Checkers {
 				
 				int coord = b.convertCoord(x, y);
 				if (ownsPiece(b, coord, p)) {
-					// TODO
-					// handle piece direction options e.g. pawns vs. kings, red vs. black
 					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
 						
@@ -190,7 +191,7 @@ public class Checkers {
 	}
 	
     // plays a game of checkers
-    public void play(Player player1, Player player2) {
+    public static void play(Player player1, Player player2) {
         boolean gameover = false;
         Board board = setup();
         Player plyr = player1;

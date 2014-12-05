@@ -1,6 +1,5 @@
 package grouplab;
 
-import grouplab.Checkers;
 
 import java.util.LinkedList;
 
