@@ -9,7 +9,7 @@ public class Game {
 
 
 	//Main method the game
-	public static void main(String[] args){
+	public void main(String[] args){
 
 		int playerOneSelection; //Integer selection of the type of player one
 		int playerTwoSelection; //Integer selection of the type of player Two
@@ -25,7 +25,7 @@ public class Game {
 		
 		System.out.println("Would you like player one to be: 1 Human, 2 Min-Max, 3 Andrew");  //Which type of player
 		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
-		playerOneSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Grab the input, then make sure its not wrong
+		playerOneSelection = inputHelper.intToPlayer((humanInput.nextInt())); //Grab the input, then make sure its not wrong
 		
 
 		//IMPORTANT UNKOWN RESULT WITH CHARACTER, INVESTIGATE
