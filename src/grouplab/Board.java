@@ -51,7 +51,7 @@ public class Board {
 	
 	// detects if a piece is on the first column
 	public boolean onFirstCol(int index) { 
-		if ((index == 0) or (index % size == 0))
+		if ((index == 0) || (index % size == 0))
 			return true;
 		return false;
 	}
@@ -64,7 +64,7 @@ public class Board {
 	}
 	
 	// detects if a piece is on the last row
-	public boolean onLastRowint index) {	
+	public boolean onLastRow (int index) {	
 		if ((index < Math.pow(size, 2) - size))
 			return true;
 		return false;
