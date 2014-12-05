@@ -4,12 +4,12 @@ import grouplab.Board;
 import grouplab.Checkers.Side;
 import grouplab.ComputerPlayer;
 
-public class WeightedCountCheckersPlayer extends ComputerPlayer {
+public class CenterWeightedCountCheckersPlayer extends ComputerPlayer {
 
 	private int pawn_value;
 	private int king_value;
 
-	public WeightedCountCheckersPlayer(Side s, int pawn_value, int king_value) {
+	public CenterWeightedCountCheckersPlayer(Side s, int pawn_value, int king_value) {
 		super(s);
 		this.pawn_value = pawn_value; 
 		this.king_value= king_value;
@@ -20,7 +20,7 @@ public class WeightedCountCheckersPlayer extends ComputerPlayer {
 		int score = 0;
 		for (int x = 0; x < b.size; x++) {
 			for (int y = 0; y < b.size; y++) {
-				double weight = distance(x, y, b.size/2, b.size/2);
+				double weight = b.size/2 - distance(x, y, b.size/2, b.size/2);
 				switch(b.pieceAt(b.convertCoord(x, y))) {
 				case(1):
 					score = (int) (score + pawn_value * weight);
