@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 public class Board {
 	Hashtable<Integer, Integer> store;
-	int size = 0;
+	public int size = 0;
 	
 	// creates a standard checkers board of dimension 8
 	public Board() {
