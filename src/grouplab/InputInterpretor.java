@@ -1,7 +1,5 @@
 package grouplab;
 
-import java.awt.Point;
-
 public class InputInterpretor {
     
     public static final int MIN_PLAYER_TYPE = 1;  //The minimum valid player selection

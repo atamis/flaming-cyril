@@ -1,7 +1,6 @@
 package grouplab;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * default implementation of checkers
@@ -35,7 +34,11 @@ public class Checkers {
 	
 	public static enum Side {
 		BLACK,
-		RED;		
+		RED;
+		
+		public Side opponent() {
+			return values()[(1 - ordinal())];
+		}
 	}
 	
 	// tests if a player owns a piece at a specific index
@@ -84,8 +87,8 @@ public class Checkers {
 	}
 	
 	// get a legal moves for a player
-	public static List<Move> getLegalMoves(Board b, Side p) {
-		List<Move> result = new LinkedList<Move>();
+	public static LinkedList<Move> getLegalMoves(Board b, Side p) {
+		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
 		
 		for (int x = 0; x < 8; x++) {
@@ -93,8 +96,6 @@ public class Checkers {
 				
 				int coord = b.convertCoord(x, y);
 				if (ownsPiece(b, coord, p)) {
-					// TODO
-					// handle piece direction options e.g. pawns vs. kings, red vs. black
 					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
 						
@@ -189,21 +190,35 @@ public class Checkers {
 		return b;
 	}
 	
-	// TODO
-	// plays a game of checkers
-	public static void play(Player player1, Player p2) {
-		boolean gameover = false;
-		Board board = setup();
-		List<Move> moves = getLegalMoves();
-		Player plyr = player1;
-		
-		while (!gameover) {
-			if (isWin(board, Side.BLACK)) { // not working (should say current side)
-				gameover = true;
-				System.out.printf("%s wins!", plyr.getName());
-			}			
-		}
-		// TODO
-		// check if a move takes a piece - if it does recurse
-	}
+    // plays a game of checkers
+    public static void play(Player player1, Player player2) {
+        boolean gameover = false;
+        Board board = setup();
+        Player plyr = player1;
+        Side current = Side.BLACK;
+        
+        while (!gameover) {
+            if (isWin(board, current)) { // not working
+                gameover = true;
+                System.out.printf("%s wins!", plyr.getName());
+            }
+            
+            Move m = plyr.queryMove(board, getLegalMoves(board, current));
+            
+            board = applyMove(board, m, current);
+            
+            // TODO
+            // still need to check if a move takes a piece
+            
+            current = current.opponent();
+            
+            if (plyr == player1) {
+                plyr = player2;
+            } else {
+                plyr = player1; 
+            }
+            
+        }
+    }
+>>>>>>> e35ad680ac2208fe4134d9e68c5b683c323a2e94
 }
