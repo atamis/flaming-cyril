@@ -54,7 +54,7 @@ public class HumanPlayer implements Player {
 
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "HumanPlayer";
 	}
     
 }

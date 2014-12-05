@@ -194,14 +194,14 @@ public class Checkers {
 	public static void play(Player player1, Player p2) {
 		boolean gameover = false;
 		Board board = setup();
+		List<Move> moves = getLegalMoves();
 		Player plyr = player1;
 		
 		while (!gameover) {
-			if (isWin(board, Side.BLACK)) { // not working
+			if (isWin(board, Side.BLACK)) { // not working (should say current side)
 				gameover = true;
 				System.out.printf("%s wins!", plyr.getName());
-			}
-			
+			}			
 		}
 		// TODO
 		// check if a move takes a piece - if it does recurse
