@@ -1,24 +1,26 @@
 package grouplab;
 
-import java.util.Hashtable;
+import java.util.ArrayList;
 
 public class Board {
-	Hashtable<Integer, Integer> store;
+	ArrayList<Integer> store;
 	int size = 0;
 	
 	// creates a standard checkers board of dimension 8
 	public Board() {
-		store = new Hashtable<Integer, Integer>(8*8);
+		this(8);
 	}
 	
 	// creates a checkers board of dimension size
 	public Board(int s) {
 		size = s;
-		store = new Hashtable<Integer, Integer>(s*s);
+		store = new ArrayList<Integer>();
+		for(int i = 0; i < s*s; i++) store.add(i, 0);
 	}
 	
 	// creates a clone of board b
 	public Board(Board b) {
+		//TODO: Fix this to actually copy the contents
 		store = b.store;
 		size = b.size;
 	}
@@ -34,7 +36,7 @@ public class Board {
 			System.out.printf("Piece already exists at %d!", index);
 			return;
 		}
-		store.put(index, id);
+		store.set(index, id);
 	}
 	
 	// get the piece at a given location
@@ -78,7 +80,7 @@ public class Board {
 	// clears all pieces from the board
 	public void clear() {
 		for (int i = 0; i < size; i++) {
-			store.put(i, 0);
+			store.set(i, 0);
 		}
 	}
 	
