@@ -31,7 +31,7 @@ public class InputInterpretor {
         
         
         if ((length != 3) || (comma.equals(",") == false)) { //If the length of the arguements is not 3, and the second arguement is not ','
-        	System.out.printf("(L:%d, %s, %s, %s)", length, tempXS, tempYS, comma);
+        	//System.out.printf("(L:%d, %s, %s, %s)", length, tempXS, tempYS, comma);
         	return -1; //Return fail
         }
         
@@ -40,12 +40,12 @@ public class InputInterpretor {
             tempX = Integer.parseInt(tempXS, 10); //10 means base 10
             tempY = Integer.parseInt(tempYS, 10); //10 means base 10
         } catch (NumberFormatException e) {
-        	System.out.printf("Failed to parse");
+        	//System.out.printf("Failed to parse");
             return -1; //Return fail;
         }
         
         if ((tempX > 7) || (tempY > 7)) {
-        	System.out.printf("out of bounds");
+        	//System.out.printf("out of bounds");
             return -1; //Return fail    
         }
         

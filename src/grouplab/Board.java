@@ -74,7 +74,15 @@ public class Board {
 
 	// prints the board to stdout
 	public void show() {
-		// TODO
+		System.out.print("\n");
+		for (int x = 0; x < size; x++)
+			for (int y = 0; y < size; y++)
+				int index = this.convertCoord(x, y);
+				System.out.print(store[index]);
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
 	}
 	
 	// clears all pieces from the board
