@@ -9,7 +9,7 @@ public class Game {
 
 
 	//Main method the game
-	public void main(String[] args){
+	public static void main(String[] args){
 
 		int playerOneSelection; //Integer selection of the type of player one
 		int playerTwoSelection; //Integer selection of the type of player Two
