@@ -1,5 +1,3 @@
-package grouplab;
-
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -19,8 +17,11 @@ public class HumanPlayer implements Player {
         
         humanInput = new Scanner(System.in);  //Initialize the scanner
         inputHelper =  new InputInterpretor();  //Initialize the inputinterpretor
-
         
+        System.out.printf("Valid Moves\n");
+        for (Move m : moves) {
+        	System.out.printf("(%d, %d)\n", m.o, m.d);
+        }
         System.out.println("Which piece would you like to move? Format: 2,3");
         origin = getInput(humanInput, inputHelper, b); //Grab the players input
         while (origin == -1) { //While origin is not a valid coordinate
@@ -55,6 +56,11 @@ public class HumanPlayer implements Player {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return "HumanPlayer";
+	}
+	@Override
+	public boolean isHuman() {
+		// TODO Auto-generated method stub
+		return false;
 	}
     
 }

@@ -1,5 +1,3 @@
-package grouplab;
-
 import java.util.ArrayList;
 
 public class Board {
@@ -21,7 +19,7 @@ public class Board {
 	// creates a clone of board b
 	public Board(Board b) {
 		//TODO: Fix this to actually copy the contents
-		store = b.store;
+		store= new ArrayList<Integer>(b.store);
 		size = b.size;
 	}
 	
@@ -31,15 +29,17 @@ public class Board {
 	}
 	
 	// places a piece with id at index
-	public void setPiece(int index, int id) {
-		if (store.get(index) != 0) {
-			System.out.printf("Piece already exists at %d!", index);
-			return;
+	public boolean setPiece(int index, int id) {
+		if (pieceAt(index) != 0) {
+			System.out.printf("Piece already exists at %d!\n", index);
+			int i = 1/0;
+			return false;
 		}
 		store.set(index, id);
+		return true;
 	}
 	
-	// get the piece at a given location
+	// get the id of a piece at location index
 	public int pieceAt(int index) {
 		return store.get(index);
 	}
@@ -66,8 +66,8 @@ public class Board {
 	}
 	
 	// detects if a piece is on the last row
-	public boolean onLastRow (int index) {	
-		if ((index < Math.pow(size, 2) - size))
+	public boolean onLastRow(int index) {	
+		if ((index > Math.pow(size, 2) - size))
 			return true;
 		return false;
 	}

@@ -1,5 +1,3 @@
-package grouplab;
-
 import java.util.LinkedList;
 
 /**
@@ -15,37 +13,27 @@ import java.util.LinkedList;
 
 public class Checkers {
 
-	static int[] redDirection = { 1, 2 };
-	static int[] blkDirection = { 3, 4 };
-	static int[] kingDirection = { 1, 2, 3, 4 };
+	static int[] redDirection = { 0, 1 };
+	static int[] blkDirection = { 2, 3 };
+	static int[] kingDirection = { 0, 1, 2, 3 };
 
 	public static int[] getDirections(int id) {
 		switch (id) {
 		case(1):
 			return blkDirection;
-		case(2):
-			return redDirection;
 		case(3):
+			return redDirection;
+		case(2):
 		case(4):
 			return kingDirection;
 		}
 		return null;
 	}
 
-	public static enum Side {
-		BLACK,
-		RED;
-
-		public Side opponent() {
-			return values()[(1 - ordinal())];
-		}
-	}
-
 	// tests if a player owns a piece at a specific index
 	public static boolean ownsPiece(Board b, int index, Side p) {
 		int piece = b.pieceAt(index);
 		if (piece == 0) {
-			System.out.printf("There isn't even a piece on tile %d!", index);
 			return false;
 		}
 		if (p == Side.BLACK) {
@@ -61,29 +49,32 @@ public class Checkers {
 
 	// gets tile in specified direction
 	public static int getAdjacent(Board b, int index, int direction) {
-		if ((index < 0) || (index > b.size))
-			System.out.printf("Index out of bounds: %d", direction);
+		if ((index < 0) || (index > Math.pow(b.size, 2))) {
+			System.out.printf("Index out of bounds: %d\n", direction);
 			System.exit(1);
+		}
 		switch(direction) {
-		case(0):
-			if  ((b.onFirstRow(index) == true)  || (b.onFirstCol(index) == true))
+			// north west
+			case(0):
+				if  ((b.onFirstRow(index) == true)  || (b.onFirstCol(index) == true))
+						return -1;
+				return index - (b.size + 1);
+			// north east
+			case(1):
+				if ((b.onFirstRow(index) == true) || (b.onLastCol(index) == true))
 					return -1;
-			return direction - (b.size + 1);
-		case(1):
-			if ((b.onFirstRow(index) == true) || (b.onLastCol(index) == true))
+				return index - (b.size - 1);
+			case(2):
+				if ((b.onLastRow(index) == true) || (b.onFirstCol(index) == true))
+					return -1;
+				return index + (b.size - 1);
+			case(3):
+				if ((b.onLastRow(index) == true) || (b.onLastCol(index) == true))
+					return -1;
+				return index + (b.size + 1);
+			default:
+				System.out.printf("%d is not a valid direction!", direction);
 				return -1;
-			return direction - (b.size - 1);
-		case(2):
-			if ((b.onLastRow(index) == true) || (b.onFirstCol(index) == true))
-				return -1;
-			return direction + (b.size - 1);
-		case(3):
-			if ((b.onLastRow(index) == true) || (b.onLastCol(index) == true))
-				return -1;
-			return direction + (b.size + 1);
-		default:
-			System.out.printf("%d is not a valid direction!", direction);
-			System.exit(1);
 		}
 	}
 
@@ -91,31 +82,39 @@ public class Checkers {
 	public static LinkedList<Move> getLegalMoves(Board b, Side p) {
 		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
-
+        
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 
 				int coord = b.convertCoord(x, y);
+			
+				
 				if (ownsPiece(b, coord, p)) {
+					//System.out.printf("Checking piece at %d\n", coord);
 					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
-
+						//System.out.printf("Got adjacent at %d, %d\n", coord, adj);
+						if (adj == -1) {
+							continue;
+						}
+						//System.out.printf("Testing: (ID:%d, Loc:%d, Dir:%d Adj: %d)\n", b.pieceAt(coord), coord, dir, adj);
 						// test if a jump can be made
-						if ((b.pieceAt(adj) != 0) && (ownsPiece(b, adj, p) == false)) {
+						if ((b.pieceAt(adj) != 0) && (!ownsPiece(b, adj, p))) {
+							System.out.printf("Possible jump\n");
 							int adj2 = getAdjacent(b, adj, dir);
 							// index out of bounds
 							if (adj2 == -1) {
 								continue;
 							} else if (b.pieceAt(adj2) == 0) {
+								System.out.printf("Found jump/n");
 								// delete any non-jumps
 								for (Move m : result) {
 									if (m.length() == 1)
 										result.remove(m);
 								}
-								result.add(new Move(coord, adj2));
-								canJump = true;
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
+							System.out.printf("Can step");
 							result.add(new Move(coord, adj));
 						}
 					}
@@ -124,6 +123,7 @@ public class Checkers {
 		}
 		return result;
 	}
+			
 
 	// applies a move to the current board.
 	public static Board applyMove(Board b, Move m, Side s) {
@@ -134,7 +134,10 @@ public class Checkers {
 				result.setPiece(m.d, 2);
 				// indicate end of turn
 			} else {
+				System.out.printf("Placing piece\n");
+				System.out.printf("Coord:%d, Id:%d\n", m.d, result.pieceAt(m.d));
 				result.setPiece(m.d, b.pieceAt(m.o));
+				
 			}
 		} else if (s == Side.RED) {
 			if ((b.pieceAt(m.o) == 3) && (b.onFirstRow(m.d) == true)) {
@@ -148,6 +151,7 @@ public class Checkers {
 		// delete the piece if a jump
 		int coord = 0;
 		if (m.length() > 1) {
+			System.out.printf("Removing piece from jump\n");
 			for (int i=0; i<4; i++) {
 				coord = getAdjacent(b, m.o, i);
 				if (getAdjacent(b, coord, i) == m.d)
@@ -159,10 +163,10 @@ public class Checkers {
 	}
 
 	// tests if a given board state is a winning board state
-	public static boolean isWin(Board b, Side s) {
+	public static boolean canMove(Board b, Side s) {
 		if (getLegalMoves(b, s).size() > 0)
-			return false;
-		return true;
+			return true;
+		return false;
 	}
 
 	// sets up the initial board state
@@ -182,9 +186,9 @@ public class Checkers {
 		for (int r=5; r < 8; r++) {
 			for (int c=0; c<8; c++) {
 				if (r % 2 == 0) {
-					if (c % 2 != 0) b.setPiece(b.convertCoord(c, r), 1);
+					if (c % 2 != 0) b.setPiece(b.convertCoord(c, r), 3);
 				} else {
-					if (c % 2 == 0) b.setPiece(b.convertCoord(c, r), 1);
+					if (c % 2 == 0) b.setPiece(b.convertCoord(c, r), 3);
 				}
 			}
 		}
@@ -198,16 +202,26 @@ public class Checkers {
         Player plyr = player1;
         Side current = Side.BLACK;
 
+        int test = 21 % 8;
+        
         while (!gameover) {
-            if (isWin(board, current)) { // not working
+            if (!canMove(board, current)) { // not working
                 gameover = true;
-                System.out.printf("%s wins!", plyr.getName());
+                System.out.printf("%s wins!", current.opponent());
+                break;
             }
-
+            
+            
+            
+            
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
 
+            System.out.printf("Got move\n");
+            
             board = applyMove(board, m, current);
 
+            System.out.printf("Applied move\n");
+            
             // TODO
             // still need to check if a move takes a piece
 
