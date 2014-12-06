@@ -1,5 +1,7 @@
 package grouplab;
 
+import java.util.Scanner;
+
 public class Game {
 
 	//I got bored of making a new variable for each function call halfway through this one, so 
@@ -7,12 +9,12 @@ public class Game {
 
 
 	//Main method the game
-	public void main(String[] args){
+	public static void main(String[] args){
 
 		int playerOneSelection; //Integer selection of the type of player one
 		int playerTwoSelection; //Integer selection of the type of player Two
-		Player playerOne; //Player one
-		Player playerTwo; //Player two
+		Player playerOne = null; //Player one
+		Player playerTwo = null; //Player two
 		Scanner humanInput;  //A scanner to grab input
 		InputInterpretor inputHelper; //An input interpretor to make sure the user can follow instructions
 
@@ -23,13 +25,13 @@ public class Game {
 		
 		System.out.println("Would you like player one to be: 1 Human, 2 Min-Max, 3 Andrew");  //Which type of player
 		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
-		playerOneSelection = inputHelper(humanInput.nextInt()); //Grab the input, then make sure its not wrong
+		playerOneSelection = inputHelper.intToPlayer((humanInput.nextInt())); //Grab the input, then make sure its not wrong
 		
 
 		//IMPORTANT UNKOWN RESULT WITH CHARACTER, INVESTIGATE
 		while (playerOneSelection == -1) { //While the input is invalid
 			System.out.println("Invalid input"); //Tell the user that they are a moron
-			playerOneSelection = inputHelper(humanInput.nextInt()); //Try to grab a selection again
+			playerOneSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Try to grab a selection again
 		}
 
 		switch(playerOneSelection) { //Create the correct player
@@ -40,13 +42,13 @@ public class Game {
 
 		System.out.println("Would you like player two to be: (1) Human, (2) Min-Max, (3) Andrew"); //Which type of player
 		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
-		playerTwoSelection = inputHelper(humanInput.nextInt()); //Grab the input, then make sure its not wrong
+		playerTwoSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Grab the input, then make sure its not wrong
 
 
 		//IMPORTANT UNKOWN RESULT WITH CHARACTER, INVESTIGATE
 		while (playerTwoSelection == -1) { //While the input is invalid
 			System.out.println("Invalid input"); //Tell the user that they are a moron
-			playerTwoSelection = inputHelper(humanInput.nextInt()); //Try to grab a selection again
+			playerTwoSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Try to grab a selection again
 		}
 
 		switch(playerTwoSelection) { //Create the correct player

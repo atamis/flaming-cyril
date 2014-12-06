@@ -62,6 +62,7 @@ public class Checkers {
 	// gets tile in specified direction
 	public static int getAdjacent(Board b, int index, int direction) {
 		if ((index < 0) || (index > b.size))
+			System.out.printf("Index out of bounds: %d\n", direction);
 			System.out.printf("Index out of bounds: %d", direction);
 			System.exit(1);
 		switch(direction) {
@@ -83,7 +84,8 @@ public class Checkers {
 			return direction + (b.size + 1);
 		default:
 			System.out.printf("%d is not a valid direction!", direction);
-			System.exit(1);
+			return -1;
+
 		}
 	}
 
@@ -99,6 +101,21 @@ public class Checkers {
 				if (ownsPiece(b, coord, p)) {
 					for (int dir : getDirections(b.pieceAt(coord))) {
 						int adj = getAdjacent(b, coord, dir);
+						
+						// test if a jump can be made
+						if ((b.pieceAt(adj) != 0) && (ownsPiece(b, adj, p) == false)) {
+							int adj2 = getAdjacent(b, adj, dir);
+							// index out of bounds
+							if (adj2 == -1) {
+								continue;
+							} else if (b.pieceAt(adj2) == 0) {
+								// delete any non-jumps
+								for (Move m : result) {
+									if (m.length() == 1)
+										result.remove(m);
+								}
+							}
+						}
 
 						// test if a jump can be made
 						if ((b.pieceAt(adj) != 0) && (ownsPiece(b, adj, p) == false)) {
@@ -112,8 +129,8 @@ public class Checkers {
 									if (m.length() == 1)
 										result.remove(m);
 								}
-								result.add(new Move(coord, adj2));
-								canJump = true;
+							} else if ((b.pieceAt(adj) == 0) && (canJump == false)) { 
+								result.add(new Move(coord, adj));
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
 							result.add(new Move(coord, adj));
@@ -124,6 +141,7 @@ public class Checkers {
 		}
 		return result;
 	}
+			
 
 	// applies a move to the current board.
 	public static Board applyMove(Board b, Move m, Side s) {
