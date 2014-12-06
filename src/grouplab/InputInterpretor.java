@@ -1,5 +1,3 @@
-package grouplab;
-
 public class InputInterpretor {
     
     public static final int MIN_PLAYER_TYPE = 1;  //The minimum valid player selection
@@ -25,15 +23,16 @@ public class InputInterpretor {
         //Try to grab substrings of the X, separator, and Y
         try {
             tempXS = input.substring(0,1); //X value
-            tempYS = input.substring(1,2); //Y Value
-            comma = input.substring(2,3); //Should be a comma
+            tempYS = input.substring(2,3); //Y Value
+            comma = input.substring(1,2); //Should be a comma
         } catch (IndexOutOfBoundsException e) {
             return -1; //Return fail
         }
         
         
-        if ((length != 3) || (comma != ",")) { //If the length of the arguements is not 3, and the second arguement is not ','
-            return -1; //Return fail
+        if ((length != 3) || (comma.equals(",") == false)) { //If the length of the arguements is not 3, and the second arguement is not ','
+        	System.out.printf("(L:%d, %s, %s, %s)", length, tempXS, tempYS, comma);
+        	return -1; //Return fail
         }
         
         
@@ -41,11 +40,13 @@ public class InputInterpretor {
             tempX = Integer.parseInt(tempXS, 10); //10 means base 10
             tempY = Integer.parseInt(tempYS, 10); //10 means base 10
         } catch (NumberFormatException e) {
+        	System.out.printf("Failed to parse");
             return -1; //Return fail;
         }
         
         if ((tempX > 7) || (tempY > 7)) {
-            return -1; //Return fail
+        	System.out.printf("out of bounds");
+            return -1; //Return fail    
         }
         
         
