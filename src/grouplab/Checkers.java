@@ -15,9 +15,9 @@ import java.util.LinkedList;
 
 public class Checkers {
 
-	static int[] redDirection = { 1, 2 };
-	static int[] blkDirection = { 3, 4 };
-	static int[] kingDirection = { 1, 2, 3, 4 };
+	static int[] redDirection = { 0, 1 };
+	static int[] blkDirection = { 2, 3 };
+	static int[] kingDirection = { 0, 1, 2, 3 };
 
 	public static int[] getDirections(int id) {
 		switch (id) {
