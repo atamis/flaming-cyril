@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 public class Checkers {
 
+	private boolean pieceTaken = false; //Keeps track of if a piece was taken, because applyMove returns a board
 	static int[] redDirection = { 0, 1 };
 	static int[] blkDirection = { 2, 3 };
 	static int[] kingDirection = { 0, 1, 2, 3 };
