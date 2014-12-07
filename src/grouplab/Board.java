@@ -75,7 +75,7 @@ public class Board {
 	// prints the board to stdout
 	public void show() {
 		System.out.print("\n");
-		for (int y = 0; y < size; y++) {}
+		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
 				int index = this.convertCoord(x, y);
 				System.out.print(store.get(index) + " ");
