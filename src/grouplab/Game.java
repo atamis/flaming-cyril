@@ -1,5 +1,3 @@
-package grouplab;
-
 import java.util.Scanner;
 
 public class Game {
@@ -36,8 +34,8 @@ public class Game {
 
 		switch(playerOneSelection) { //Create the correct player
 			case 1: playerOne = new HumanPlayer();
-			//case 2: playerOne = new Min-Max thing();
-			//case 3: playerOne = new Andrew thing();
+			//case 2: p1 = new Min-Max thing();
+			//case 3: p1 = new Andrew thing();
 		}
 
 		System.out.println("Would you like player two to be: (1) Human, (2) Min-Max, (3) Andrew"); //Which type of player
@@ -53,10 +51,10 @@ public class Game {
 
 		switch(playerTwoSelection) { //Create the correct player
 			case 1: playerTwo = new HumanPlayer();
-			//case 2: playerTwo = new Min-Max thing();
-			//case 3: playerTwo = new Andrew thing();
+			//case 2: p1 = new Min-Max thing();
+			//case 3: p1 = new Andrew thing();
 		}
-
+		
 		Checkers.play(playerOne, playerTwo); //Play the game
 
 
