@@ -32,13 +32,15 @@ public class Board {
 	public boolean setPiece(int index, int id) {
 		if (pieceAt(index) != 0) {
 			System.out.printf("Piece already exists at %d!\n", index);
-			int i = 1/0;
 			return false;
 		}
 		store.set(index, id);
 		return true;
 	}
 	
+	public void removePiece(int index) {
+		store.set(index, 0);
+	}
 	// get the id of a piece at location index
 	public int pieceAt(int index) {
 		return store.get(index);
@@ -73,17 +75,17 @@ public class Board {
 	}
 
 	// prints the board to stdout
-	public void show() {
-		System.out.print("\n");
-		for (int y = 0; y < size; y++) {
+		public void show() {
+			System.out.print("\n");
 			for (int x = 0; x < size; x++) {
-				int index = this.convertCoord(x, y);
-				System.out.print(store.get(index) + " ");
+				for (int y = 0; y < size; y++) {
+					int index = this.convertCoord(y, x);
+					System.out.print(store.get(index) + " ");
+				}
+				System.out.print("\n");
 			}
 			System.out.print("\n");
 		}
-		System.out.print("\n");
-	}
 	
 	// clears all pieces from the board
 	public void clear() {

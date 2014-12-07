@@ -115,7 +115,6 @@ public class Checkers {
 								}
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
-							System.out.printf("Can step");
 							result.add(new Move(coord, adj));
 						}
 					}
@@ -135,11 +134,9 @@ public class Checkers {
 				result.setPiece(m.d, 2);
 				// indicate end of turn
 			} else {
-				System.out.printf("Placing piece\n");
-				System.out.printf("Coord:%d, Id:%d\n", m.d, result.pieceAt(m.d));
 				result.setPiece(m.d, b.pieceAt(m.o));
-				
 			}
+			result.removePiece(m.o);
 		} else if (s == Side.RED) {
 			if ((b.pieceAt(m.o) == 3) && (b.onFirstRow(m.d) == true)) {
 				result.setPiece(m.d, 4);
@@ -147,6 +144,7 @@ public class Checkers {
 			} else {
 				result.setPiece(m.d, b.pieceAt(m.o));
 			}
+			result.removePiece(m.o);
 		}
 
 		// delete the piece if a jump
@@ -158,7 +156,7 @@ public class Checkers {
 				if (getAdjacent(b, coord, i) == m.d)
 					break;
 			}
-			result.setPiece(coord, 0);
+			result.removePiece(coord);
 		}
 		return result;
 	}
@@ -196,32 +194,41 @@ public class Checkers {
 		return b;
 	}
 
+	public static void coordToString(Board b, int coord) {
+        
+		int x = coord % b.size;
+		int y = (int)Math.floor(coord / b.size);
+        System.out.printf("%c%d", (char)(64 + y), x);
+    }
+	
     // plays a game of checkers
     public static void play(Player player1, Player player2) {
         boolean gameover = false;
         Board board = setup();
         Player plyr = player1;
         Side current = Side.BLACK;
-
-        int test = 21 % 8;
         
+        coordToString(board, board.convertCoord(3, 2));
+        
+        /*
         while (!gameover) {
             if (!canMove(board, current)) { // not working
                 gameover = true;
                 System.out.printf("%s wins!", current.opponent());
                 break;
             }
-            
-            
-            
-            
+             
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
-
-            System.out.printf("Got move\n");
+            
+            while (getLegalMoves(board, current).contains(m) == false) {
+            	System.out.printf("Move: (%d, %d)\n", m.o, m.d);
+            	System.out.printf("Invalid move! Try again.\n");
+            	m = plyr.queryMove(board, getLegalMoves(board, current));
+            }
             
             board = applyMove(board, m, current);
-
-            System.out.printf("Applied move\n");
+            
+            board.show();
             
             // TODO
             // still need to check if a move takes a piece
@@ -233,7 +240,7 @@ public class Checkers {
             } else {
                 plyr = player1;
             }
-
         }
+        */
     }
 }
