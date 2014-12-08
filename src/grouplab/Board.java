@@ -1,3 +1,5 @@
+package grouplab;
+
 import java.util.ArrayList;
 
 public class Board {

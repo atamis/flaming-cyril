@@ -1,3 +1,5 @@
+package grouplab;
+
 import java.util.LinkedList;
 
 /**
@@ -13,12 +15,17 @@ import java.util.LinkedList;
 
 public class Checkers {
 
-	private int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
+	private static int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
 	//0 indicates nothing of note happened and no extra turn
 	//1 indicates a piece was taken, so extra turn
 	//2 indicates that the piece was just promoted to king so it doesn't get another turn either way
 
+	public enum Side{BLACK, RED;
 
+	public Side opponent() {
+		if(this == BLACK) return RED;
+		else return BLACK;
+	}}
 	static int[] redDirection = { 0, 1 };
 	static int[] blkDirection = { 2, 3 };
 	static int[] kingDirection = { 0, 1, 2, 3 };
