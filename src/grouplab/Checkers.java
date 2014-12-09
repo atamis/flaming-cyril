@@ -3,15 +3,15 @@ package grouplab;
 import java.util.LinkedList;
 
 /**
- * default implementation of checkers
- * ALL MOVES ARE ASSUMED TO BE LEGAL
- *
- * @author Nick Care
- * @author Andrew Amis
- * @author Sam Goree
- * @author Gabe Appleby
- *
- */
+* default implementation of checkers
+* ALL MOVES ARE ASSUMED TO BE LEGAL
+*
+* @author Nick Care
+* @author Andrew Amis
+* @author Sam Goree
+* @author Gabe Appleby
+*
+*/
 public class Checkers {
 
 	private static int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
@@ -19,24 +19,27 @@ public class Checkers {
 	//1 indicates a piece was taken, so extra turn
 	//2 indicates that the piece was just promoted to king so it doesn't get another turn either way
 
-	public enum Side{BLACK, RED;
+	public enum Side{
+		BLACK,
+		RED;
 
-	public Side opponent() {
-		if(this == BLACK) return RED;
-		else return BLACK;
-	}}
+		public Side opponent() {
+			if (this == BLACK) return RED;
+			else return BLACK;
+		}
+	}
 	static int[] redDirection = { 0, 1 };
 	static int[] blkDirection = { 2, 3 };
 	static int[] kingDirection = { 0, 1, 2, 3 };
 
 	public static int[] getDirections(int id) {
 		switch (id) {
-		case(1):
+			case(1):
 			return blkDirection;
-		case(3):
+			case(3):
 			return redDirection;
-		case(2):
-		case(4):
+			case(2):
+			case(4):
 			return kingDirection;
 		}
 		return null;
@@ -50,13 +53,13 @@ public class Checkers {
 		}
 		if (p == Side.BLACK) {
 			if ((piece == 1) || (piece == 2))
-				return true;
+			return true;
 			return false;
-		 } else {
-			 if ((piece == 3) || (piece == 4))
-			 	return true;
-			 return false;
-		 }
+		} else {
+			if ((piece == 3) || (piece == 4))
+			return true;
+			return false;
+		}
 	}
 
 	// gets tile in specified direction
@@ -68,25 +71,25 @@ public class Checkers {
 		switch(direction) {
 			// north west
 			case(0):
-				if  ((b.onFirstRow(index) == true)  || (b.onFirstCol(index) == true))
-						return -1;
-				return index - (b.size + 1);
+			if  ((b.onFirstRow(index) == true)  || (b.onFirstCol(index) == true))
+			return -1;
+			return index - (b.size + 1);
 			// north east
 			case(1):
-				if ((b.onFirstRow(index) == true) || (b.onLastCol(index) == true))
-					return -1;
-				return index - (b.size - 1);
+			if ((b.onFirstRow(index) == true) || (b.onLastCol(index) == true))
+			return -1;
+			return index - (b.size - 1);
 			case(2):
-				if ((b.onLastRow(index) == true) || (b.onFirstCol(index) == true))
-					return -1;
-				return index + (b.size - 1);
+			if ((b.onLastRow(index) == true) || (b.onFirstCol(index) == true))
+			return -1;
+			return index + (b.size - 1);
 			case(3):
-				if ((b.onLastRow(index) == true) || (b.onLastCol(index) == true))
-					return -1;
-				return index + (b.size + 1);
+			if ((b.onLastRow(index) == true) || (b.onLastCol(index) == true))
+			return -1;
+			return index + (b.size + 1);
 			default:
-				System.out.printf("%d is not a valid direction!", direction);
-				return -1;
+			System.out.printf("%d is not a valid direction!", direction);
+			return -1;
 		}
 	}
 
@@ -121,7 +124,7 @@ public class Checkers {
 								// delete any non-jumps
 								for (Move m : result) {
 									if (m.length() == 1)
-										result.remove(m);
+									result.remove(m);
 								}
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
@@ -166,7 +169,7 @@ public class Checkers {
 			for (int i=0; i<4; i++) {
 				coord = getAdjacent(b, m.o, i);
 				if (getAdjacent(b, coord, i) == m.d)
-					break;
+				break;
 			}
 			if (anotherTurn != 2) { //if the piece was not just promoted to king
 				anotherTurn = 1; //A piece was taken
@@ -179,7 +182,7 @@ public class Checkers {
 	// tests if a given board state is a winning board state
 	public static boolean canMove(Board b, Side s) {
 		if (getLegalMoves(b, s).size() > 0)
-			return true;
+		return true;
 		return false;
 	}
 
@@ -209,59 +212,53 @@ public class Checkers {
 		return b;
 	}
 
-    // plays a game of checkers
-    public static void play(Player player1, Player player2) {
-        boolean gameover = false;
-        Board board = setup();
-        Player plyr = player1;
-        Side current = Side.BLACK;
+	// plays a game of checkers
+	public static void play(Player player1, Player player2) {
+		boolean gameover = false;
+		Board board = setup();
+		Player plyr = player1;
+		Side current = Side.BLACK;
 
-        coordToString(board, board.convertCoord(3, 2));
+		while (!gameover) {
+			if (!canMove(board, current)) { // not working
+				gameover = true;
+				System.out.printf("%s wins!", current.opponent());
+				break;
+			}
 
+			Move m = plyr.queryMove(board, getLegalMoves(board, current));
+			//Helpful for debugging
+			/*
+			int origin_x = m.o % 8;
+			int origin_y = m.o / 8;
+			int dest_x = m.d % 8;
+			int dest_y = m.d / 8;
 
-        while (!gameover) {
-            if (!canMove(board, current)) { // not working
-                gameover = true;
-                System.out.printf("%s wins!", current.opponent());
-                break;
-            }
+			while (getLegalMoves(board, current).contains(m) == false) {
+			System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", origin_x, origin_y, dest_x, dest_y);
+			System.out.printf("Invalid move! Try again.\n");
+			m = plyr.queryMove(board, getLegalMoves(board, current));
+			}*/
 
-            Move m = plyr.queryMove(board, getLegalMoves(board, current));
-            //Helpful for debugging
-            /*
-            int origin_x = m.o % 8;
-            int origin_y = m.o / 8;
-            int dest_x = m.d % 8;
-            int dest_y = m.d / 8;
+			while (getLegalMoves(board, current).contains(m) == false) {
+				System.out.printf("Move: (%d, %d)\n", m.o, m.d);
+				System.out.printf("Invalid move! Try again.\n");
+				m = plyr.queryMove(board, getLegalMoves(board, current));
+			}
 
-            while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", origin_x, origin_y, dest_x, dest_y);
-            	System.out.printf("Invalid move! Try again.\n");
-            	m = plyr.queryMove(board, getLegalMoves(board, current));
-            }*/
+			board = applyMove(board, m, current);
 
-            while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: (%d, %d)\n", m.o, m.d);
-            	System.out.printf("Invalid move! Try again.\n");
-            	m = plyr.queryMove(board, getLegalMoves(board, current));
-            }
+			board.show();
 
-            board = applyMove(board, m, current);
-
-            board.show();
-
-
-            if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
-	            current = current.opponent();
-
-	            if (plyr == player1) {
-	                plyr = player2;
-	            } else {
-	                plyr = player1;
-	            }
-	        }
-	        anotherTurn = 0;
-        }
-
-    }
+			if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
+				current = current.opponent();
+				if (plyr == player1) {
+					plyr = player2;
+				} else {
+					plyr = player1;
+				}
+			}
+			anotherTurn = 0;
+		}
+	}
 }

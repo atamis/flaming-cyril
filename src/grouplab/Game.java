@@ -1,5 +1,6 @@
 package grouplab;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -11,7 +12,6 @@ import java.util.Scanner;
 * @author Andrew Amis (2014)
 * @author Gabe Appleby (2014)
 */
-
 public class Game {
 	public void main(String[] args) {
 		// player objects
@@ -19,9 +19,9 @@ public class Game {
 
 		Scanner input = new Scanner(System.in);
 
-		ArrayList<Player> controllers;
-		controllers.add(0, HumanPlayer);
-		controllers.add(1, ComputerPlayer);
+		LinkedList<String> controllers;
+		controllers.add(0, "HumanPlayer");
+		controllers.add(1, "ComputerPlayer");
 
 		// setup players
 		int result = 0;
@@ -32,7 +32,7 @@ public class Game {
 		// if its a human player
 		if (result == 0) {
 			player1 = new HumanPlayer();
-			String name = queryString("Enter your name: ");
+			String name = InputHelper.queryStr(input, "Enter your name: ");
 			player1.setName(name);
 		} else {
 			player1 = new ComputerPlayer();
@@ -42,8 +42,8 @@ public class Game {
 		result = InputHelper.queryMenu(input, "Who should play on the red side?", controllers);
 		if (result == 0) {
 			player2 = new HumanPlayer();
-			String name = queryString("Enter your name: ");
-			player.setName(name);
+			String name = InputHelper.queryStr(input, "Enter your name: ");
+			player2.setName(name);
 		} else {
 			player2 = new ComputerPlayer();
 		}

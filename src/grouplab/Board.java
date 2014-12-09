@@ -51,43 +51,43 @@ public class Board {
 	// detects if a piece is on the last column
 	public boolean onLastCol(int index) {
 		if ((index + 1) % size == 0)
-			return true;
+		return true;
 		return false;
 	}
 
 	// detects if a piece is on the first column
 	public boolean onFirstCol(int index) {
 		if ((index == 0) || (index % size == 0))
-			return true;
+		return true;
 		return false;
 	}
 
 	// detects if a piece is on the first row
 	public boolean onFirstRow(int index) {
 		if (index < size)
-			return true;
+		return true;
 		return false;
 	}
 
 	// detects if a piece is on the last row
 	public boolean onLastRow(int index) {
 		if ((index > Math.pow(size, 2) - size))
-			return true;
+		return true;
 		return false;
 	}
 
 	// prints the board to stdout
-		public void show() {
-			System.out.print("\n");
-			for (int x = 0; x < size; x++) {
-				for (int y = 0; y < size; y++) {
-					int index = this.convertCoord(y, x);
-					System.out.print(store.get(index) + " ");
-				}
-				System.out.print("\n");
+	public void show() {
+		System.out.print("\n");
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				int index = this.convertCoord(y, x);
+				System.out.print(store.get(index) + " ");
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
+	}
 
 	// clears all pieces from the board
 	public void clear() {
@@ -102,8 +102,8 @@ public class Board {
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				int index = convertCoord(x, y);
-				if ((Board)o.pieceAt(index) != index)
-					return false;
+				if (((Board)o).pieceAt(index) != index)
+				return false;
 			}
 		}
 		return true;

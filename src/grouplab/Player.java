@@ -19,5 +19,4 @@ public interface Player {
 
 	// is the player human
 	public boolean isHuman();
-
 }
