@@ -229,6 +229,7 @@ public class Checkers {
         
         
         while (!gameover) {
+        	board.show();
             if (!canMove(board, current)) { // not working
                 gameover = true;
                 System.out.printf("%s wins!", current.opponent());
@@ -236,18 +237,6 @@ public class Checkers {
             }
              
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
-            //Helpful for debugging
-            /*
-            int origin_x = m.o % 8;
-            int origin_y = m.o / 8;
-            int dest_x = m.d % 8;
-            int dest_y = m.d / 8;
-
-            while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", origin_x, origin_y, dest_x, dest_y);
-            	System.out.printf("Invalid move! Try again.\n");
-            	m = plyr.queryMove(board, getLegalMoves(board, current));
-            }*/
 
             while (getLegalMoves(board, current).contains(m) == false) {
             	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % 8), (m.o / 8), (m.d & 8), (m.d /8); ///rito delivers
@@ -258,7 +247,7 @@ public class Checkers {
             
             board = applyMove(board, m, current);
             
-            board.show();
+            
             
 
             if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
