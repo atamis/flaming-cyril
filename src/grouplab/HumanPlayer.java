@@ -1,3 +1,5 @@
+package grouplab;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -57,10 +59,12 @@ public class HumanPlayer implements Player {
 		// TODO Auto-generated method stub
 		return "HumanPlayer";
 	}
+
+    //Are we human? Or are we dancer?
 	@Override
 	public boolean isHuman() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
     
 }

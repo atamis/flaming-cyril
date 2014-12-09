@@ -1,3 +1,5 @@
+package grouplab;
+
 import java.util.LinkedList;
 
 /**
@@ -13,6 +15,17 @@ import java.util.LinkedList;
 
 public class Checkers {
 
+	private static int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
+	//0 indicates nothing of note happened and no extra turn
+	//1 indicates a piece was taken, so extra turn
+	//2 indicates that the piece was just promoted to king so it doesn't get another turn either way
+
+	public enum Side{BLACK, RED;
+
+	public Side opponent() {
+		if(this == BLACK) return RED;
+		else return BLACK;
+	}}
 	static int[] redDirection = { 0, 1 };
 	static int[] blkDirection = { 2, 3 };
 	static int[] kingDirection = { 0, 1, 2, 3 };
@@ -131,6 +144,7 @@ public class Checkers {
 		if (s == Side.BLACK) {
 			if ((b.pieceAt(m.o) == 1) && (b.onLastRow(m.d) == true)) {
 				result.setPiece(m.d, 2);
+				anotherTurn = 2; //A king was created
 				// indicate end of turn
 			} else {
 				result.setPiece(m.d, b.pieceAt(m.o));
@@ -139,6 +153,7 @@ public class Checkers {
 		} else if (s == Side.RED) {
 			if ((b.pieceAt(m.o) == 3) && (b.onFirstRow(m.d) == true)) {
 				result.setPiece(m.d, 4);
+				anotherTurn = 2; //A king was created
 				// indicate end of turn
 			} else {
 				result.setPiece(m.d, b.pieceAt(m.o));
@@ -154,6 +169,9 @@ public class Checkers {
 				coord = getAdjacent(b, m.o, i);
 				if (getAdjacent(b, coord, i) == m.d)
 					break;
+			}
+			if (anotherTurn != 2) { //if the piece was not just promoted to king
+				anotherTurn = 1; //A piece was taken
 			}
 			result.removePiece(coord);
 		}
@@ -209,7 +227,7 @@ public class Checkers {
         
         coordToString(board, board.convertCoord(3, 2));
         
-        /*
+        
         while (!gameover) {
             if (!canMove(board, current)) { // not working
                 gameover = true;
@@ -229,17 +247,18 @@ public class Checkers {
             
             board.show();
             
-            // TODO
-            // still need to check if a move takes a piece
 
-            current = current.opponent();
+            if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
+	            current = current.opponent();
 
-            if (plyr == player1) {
-                plyr = player2;
-            } else {
-                plyr = player1;
-            }
+	            if (plyr == player1) {
+	                plyr = player2;
+	            } else {
+	                plyr = player1;
+	            }
+	        }
+	        anotherTurn = 0;
         }
-        */
+        
     }
 }
