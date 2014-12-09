@@ -1,5 +1,3 @@
-package grouplab;
-
 public class Move {
 	int o = -1; int d = -1;
 	
@@ -9,8 +7,16 @@ public class Move {
 	}
 	
 	public int length() {
-		if (Math.abs(o - d - 8) > 1)
+		if ((Math.abs(o - d)-8) > 2)
 			return 2;
 		return 1;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if ((o == ((Move)obj).o) && (d == ((Move)obj).d)) {
+			return true;
+		}
+		return false;
 	}
 }
