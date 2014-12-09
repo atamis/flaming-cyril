@@ -21,7 +21,7 @@ public class Game {
 		humanInput = new Scanner(System.in);  //Initialize the scanner
         inputHelper =  new InputInterpretor();  //Initialize the inputinterpretor
 
-		System.out.println("Welcome to shit."); //Be realistic with the end user
+		System.out.println("Lets play some Checkers."); //Yeay?
 		
 		System.out.println("Would you like player one to be: 1 Human, 2 Min-Max, 3 Andrew");  //Which type of player
 		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
