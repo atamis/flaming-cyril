@@ -1,3 +1,5 @@
+package grouplab;
+
 public class Move {
 	int o = -1; int d = -1;
 	

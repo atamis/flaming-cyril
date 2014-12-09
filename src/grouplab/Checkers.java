@@ -236,7 +236,19 @@ public class Checkers {
             }
              
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
-            
+            //Helpful for debugging
+            /*
+            int origin_x = m.o % 8;
+            int origin_y = m.o / 8;
+            int dest_x = m.d % 8;
+            int dest_y = m.d / 8;
+
+            while (getLegalMoves(board, current).contains(m) == false) {
+            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", origin_x, origin_y, dest_x, dest_y);
+            	System.out.printf("Invalid move! Try again.\n");
+            	m = plyr.queryMove(board, getLegalMoves(board, current));
+            }*/
+
             while (getLegalMoves(board, current).contains(m) == false) {
             	System.out.printf("Move: (%d, %d)\n", m.o, m.d);
             	System.out.printf("Invalid move! Try again.\n");

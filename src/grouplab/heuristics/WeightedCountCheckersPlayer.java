@@ -26,10 +26,10 @@ public class WeightedCountCheckersPlayer extends ComputerPlayer {
 					score = (int) (score + pawn_value * weight);
 					break;
 				case(2):
-					score = (int) (score - pawn_value * weight);
+					score = (int) (score + king_value * weight);
 					break;
 				case(3):
-					score = (int) (score + king_value * weight);
+					score = (int) (score - pawn_value * weight);
 					break;
 				case(4):
 					score = (int) (score - king_value * weight);

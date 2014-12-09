@@ -6,6 +6,11 @@ import grouplab.ComputerPlayer;
 
 public class CenterWeightedCountCheckersPlayer extends ComputerPlayer {
 
+	/*
+	 * github.com/almost/lhs-chckers/blob/master/EvalFuns.lhs
+	 * Uses count checkers, count kings, closest to kinging, average to kinging, and kings move away.
+	 */
+	
 	private int pawn_value;
 	private int king_value;
 
@@ -26,10 +31,10 @@ public class CenterWeightedCountCheckersPlayer extends ComputerPlayer {
 					score = (int) (score + pawn_value * weight);
 					break;
 				case(2):
-					score = (int) (score - pawn_value * weight);
+					score = (int) (score + king_value * weight);
 					break;
 				case(3):
-					score = (int) (score + king_value * weight);
+					score = (int) (score - pawn_value * weight);
 					break;
 				case(4):
 					score = (int) (score - king_value * weight);
