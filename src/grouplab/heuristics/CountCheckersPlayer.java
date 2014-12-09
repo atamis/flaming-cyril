@@ -22,16 +22,20 @@ public class CountCheckersPlayer extends ComputerPlayer {
 			for (int y = 0; y < b.size; y++) {
 				switch(b.pieceAt(b.convertCoord(x, y))) {
 				case(1):
-					score = score + pawn_value;
-					break;
-				case(2):
+					// Red normal
 					score = score - pawn_value;
 					break;
+				case(2):
+					// Black normal
+					score = score + pawn_value;
+					break;
 				case(3):
-					score = score + king_value;
+					// Red king
+					score = score - king_value;
 					break;
 				case(4):
-					score = score - king_value;
+					// Black King
+					score = score + king_value;
 					break;
 				}
 			}
