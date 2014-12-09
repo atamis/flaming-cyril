@@ -13,12 +13,12 @@ public class HumanPlayer implements Player {
         int origin; //Where the piece started
         int dest; //Where it wants to go
         Scanner humanInput; //A scanner to grab input
-        InputInterpretor inputHelper; //An input interpretor to make sure the user can follow instructions
+        InputInterpretor inputHelper; //An input interpreter to make sure the user can follow instructions
         Move theMove; //The move the player will make
         
         
         humanInput = new Scanner(System.in);  //Initialize the scanner
-        inputHelper =  new InputInterpretor();  //Initialize the inputinterpretor
+        inputHelper =  new InputInterpretor();  //Initialize the inputinterpreter
         
         System.out.printf("Valid Moves\n");
         for (Move m : moves) {
