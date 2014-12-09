@@ -23,8 +23,10 @@ public class InputHelper {
         System.out.printf("%s\n", msg); // print out the message to stdout
 
         while (true) {
+            int idx = 1;
             for (String option : options) {
-                System.out.printf("\t%s\n", option);
+                System.out.printf("%d\t%s\n", idx, option);
+                idx++;
             }
 
             System.out.printf("Enter an option from the list above: ");
@@ -33,7 +35,16 @@ public class InputHelper {
             for (String opt : options) {
                 if (response.equals(opt)) {
                     return options.indexOf(response);
+                } else {
+                    int result = Integer.parseInt(response);
+                    try {
+                        options.get(result);
+                        return result;
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.printf("No element exists at %d", result);
+                    }
                 }
+
             }
             System.out.printf("Input did not match any option. Try again.\n");
         }
