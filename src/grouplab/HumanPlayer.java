@@ -22,7 +22,7 @@ public class HumanPlayer implements Player {
         
         System.out.printf("Valid Moves\n");
         for (Move m : moves) {
-        	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % 8), (m.o / 8), (m.d & 8), (m.d /8); ///rito delivers
+        	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % 8), (m.o / 8), (m.d % 8), (m.d / 8)); ///rito delivers
         }
         System.out.println("Which piece would you like to move? Format: 2,3");
         origin = getInput(humanInput, inputHelper, b); //Grab the players input
