@@ -1,5 +1,6 @@
 package grouplab;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -113,17 +114,21 @@ public class Checkers {
 						//System.out.printf("Testing: (ID:%d, Loc:%d, Dir:%d Adj: %d)\n", b.pieceAt(coord), coord, dir, adj);
 						// test if a jump can be made
 						if ((b.pieceAt(adj) != 0) && (!ownsPiece(b, adj, p))) {
-							System.out.printf("Possible jump\n");
+							
 							int adj2 = getAdjacent(b, adj, dir);
 							// index out of bounds
 							if (adj2 == -1) {
 								continue;
-							} else if (b.pieceAt(adj2) == 0) {
+							}
+							else if (b.pieceAt(adj2) == 0) {
 								System.out.printf("Found jump/n");
 								// delete any non-jumps
-								for (Move m : result) {
-									if (m.length() == 1)
-										result.remove(m);
+								canJump = true;
+								result.add(new Move(coord, adj2));
+								Iterator<Move> iterator = result.iterator();
+								while(iterator.hasNext()){
+									Move m = iterator.next();
+									if(m.length() == 1) iterator.remove();
 								}
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
