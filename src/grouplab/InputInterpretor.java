@@ -18,25 +18,23 @@ public class InputInterpretor {
         int tempY; //Temporary Y value
         String tempXS; //String of temporary X value
         String tempYS; //String of temporary Y value
-        String comma; //String of what was between X and Y value, should be a comma
+        String[] splitInput; //The split input of the human player
+
         
-        length = input.length(); //Length is the input's length
+        splitInput = input.split(","); //Split the input by a comma
         
-        //Try to grab substrings of the X, separator, and Y
-        try {
-            tempXS = input.substring(0,1); //X value
-            tempYS = input.substring(2,3); //Y Value
-            comma = input.substring(1,2); //Should be a comma
+
+        if (splitInput.length != 2) { //If the length of the arguements is not 2
+            return -1; //Return fail
+        }
+
+        
+        try { //Should be fine if first check passes, but never hurts to surround with try catch
+            tempXS = splitInput[0]; //X value
+            tempYS = splitInput[1]; //Y Value
         } catch (IndexOutOfBoundsException e) {
             return -1; //Return fail
         }
-        
-        
-        if ((length != 3) || (comma.equals(",") == false)) { //If the length of the arguements is not 3, and the second arguement is not ','
-        	//System.out.printf("(L:%d, %s, %s, %s)", length, tempXS, tempYS, comma);
-        	return -1; //Return fail
-        }
-        
         
         try { //Try to turn the first and second argument into integers
             tempX = Integer.parseInt(tempXS, 10); //10 means base 10
@@ -46,15 +44,15 @@ public class InputInterpretor {
             return -1; //Return fail;
         }
         
-        if ((tempX > 7) || (tempY > 7)) {
+        if ( (tempX > b.size-1) || (tempX < 0) || (tempY > b.size-1) || (tempY < 0) ) {
         	//System.out.printf("out of bounds");
             return -1; //Return fail    
         }
         
-        System.out.println("TempX: " + tempX);
-        System.out.println("Tempy: " + tempY);
+        //System.out.println("TempX: " + tempX);
+        //System.out.println("Tempy: " + tempY);
         coord = b.convertCoord(tempX, tempY); //The coordinates to return
-        System.out.println("Coord: " + coord);
+        //System.out.println("Coord: " + coord);
         return coord; //return the coordinates
     }
 
