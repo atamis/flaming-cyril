@@ -226,6 +226,7 @@ public class Checkers {
 				break;
 			}
 
+			board.show();
 			Move m = plyr.queryMove(board, getLegalMoves(board, current));
 			//Helpful for debugging
 			/*
@@ -239,6 +240,8 @@ public class Checkers {
 			System.out.printf("Invalid move! Try again.\n");
 			m = plyr.queryMove(board, getLegalMoves(board, current));
 			}*/
+			
+
 
 			while (getLegalMoves(board, current).contains(m) == false) {
 				System.out.printf("Move: (%d, %d)\n", m.o, m.d);
@@ -248,7 +251,6 @@ public class Checkers {
 
 			board = applyMove(board, m, current);
 
-			board.show();
 
 			if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
 				current = current.opponent();
