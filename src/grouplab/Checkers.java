@@ -12,7 +12,6 @@ import java.util.LinkedList;
  * @author Gabe Appleby
  *
  */
-
 public class Checkers {
 
 	private static int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
@@ -95,13 +94,13 @@ public class Checkers {
 	public static LinkedList<Move> getLegalMoves(Board b, Side p) {
 		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
-        
+
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 
 				int coord = b.convertCoord(x, y);
-			
-				
+
+
 				if (ownsPiece(b, coord, p)) {
 					//System.out.printf("Checking piece at %d\n", coord);
 					for (int dir : getDirections(b.pieceAt(coord))) {
@@ -113,7 +112,6 @@ public class Checkers {
 						//System.out.printf("Testing: (ID:%d, Loc:%d, Dir:%d Adj: %d)\n", b.pieceAt(coord), coord, dir, adj);
 						// test if a jump can be made
 						if ((b.pieceAt(adj) != 0) && (!ownsPiece(b, adj, p))) {
-							System.out.printf("Possible jump\n");
 							int adj2 = getAdjacent(b, adj, dir);
 							// index out of bounds
 							if (adj2 == -1) {
@@ -135,7 +133,7 @@ public class Checkers {
 		}
 		return result;
 	}
-			
+
 
 	// applies a move to the current board.
 	public static Board applyMove(Board b, Move m, Side s) {
@@ -211,30 +209,23 @@ public class Checkers {
 		return b;
 	}
 
-	public static void coordToString(Board b, int coord) {
-        
-		int x = coord % b.size;
-		int y = (int)Math.floor(coord / b.size);
-        System.out.printf("%c%d", (char)(64 + y), x);
-    }
-	
     // plays a game of checkers
     public static void play(Player player1, Player player2) {
         boolean gameover = false;
         Board board = setup();
         Player plyr = player1;
         Side current = Side.BLACK;
-        
+
         coordToString(board, board.convertCoord(3, 2));
-        
-        
+
+
         while (!gameover) {
             if (!canMove(board, current)) { // not working
                 gameover = true;
                 System.out.printf("%s wins!", current.opponent());
                 break;
             }
-             
+
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
             //Helpful for debugging
             /*
@@ -254,11 +245,11 @@ public class Checkers {
             	System.out.printf("Invalid move! Try again.\n");
             	m = plyr.queryMove(board, getLegalMoves(board, current));
             }
-            
+
             board = applyMove(board, m, current);
-            
+
             board.show();
-            
+
 
             if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
 	            current = current.opponent();
@@ -271,6 +262,6 @@ public class Checkers {
 	        }
 	        anotherTurn = 0;
         }
-        
+
     }
 }
