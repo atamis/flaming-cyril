@@ -86,6 +86,6 @@ public class InputHelper {
     public static String coordToString(Board b, int coord) {
         int x = coord % b.size;
         int y = (int)Math.floor(coord / b.size);
-        return (char)(64+y) + Integer.toString(x);
+        return (char)(63+y) + Integer.toString(x);
     }
 }
