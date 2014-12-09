@@ -250,7 +250,8 @@ public class Checkers {
             }*/
 
             while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: (%d, %d)\n", m.o, m.d);
+            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % 8), (m.o / 8), (m.d & 8), (m.d /8); ///rito delivers
+            	//System.out.printf("Move: (%d, %d)\n", m.o, m.d);
             	System.out.printf("Invalid move! Try again.\n");
             	m = plyr.queryMove(board, getLegalMoves(board, current));
             }

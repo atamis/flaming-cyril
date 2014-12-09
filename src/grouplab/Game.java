@@ -36,7 +36,7 @@ public class Game {
 
 		switch(playerOneSelection) { //Create the correct player
 			case 1: playerOne = new HumanPlayer();
-			//case 2: p1 = new Min-Max thing();
+			case 2: playerOne = new NaivePlayer());
 			//case 3: p1 = new Andrew thing();
 		}
 
@@ -53,7 +53,7 @@ public class Game {
 
 		switch(playerTwoSelection) { //Create the correct player
 			case 1: playerTwo = new HumanPlayer();
-			//case 2: p1 = new Min-Max thing();
+			case 2: playerTwo = new NaivePlayer();
 			//case 3: p1 = new Andrew thing();
 		}
 		
