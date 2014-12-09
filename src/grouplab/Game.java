@@ -13,13 +13,13 @@ import java.util.Scanner;
 * @author Gabe Appleby (2014)
 */
 public class Game {
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		// player objects
-		Player player1; Player player2;
+		Player player1 = null; Player player2 = null;
 
 		Scanner input = new Scanner(System.in);
-
-		LinkedList<String> controllers;
+		
+		LinkedList<String> controllers = new LinkedList<String>();
 		controllers.add(0, "HumanPlayer");
 		controllers.add(1, "ComputerPlayer");
 
@@ -35,7 +35,7 @@ public class Game {
 			String name = InputHelper.queryStr(input, "Enter your name: ");
 			player1.setName(name);
 		} else {
-			player1 = new ComputerPlayer();
+			//player1 = new ComputerPlayer(Side.BLACK);
 		}
 
 		// player2
@@ -45,7 +45,7 @@ public class Game {
 			String name = InputHelper.queryStr(input, "Enter your name: ");
 			player2.setName(name);
 		} else {
-			player2 = new ComputerPlayer();
+			//player2 = new ComputerPlayer();
 		}
 
 		Checkers.play(player1, player2);

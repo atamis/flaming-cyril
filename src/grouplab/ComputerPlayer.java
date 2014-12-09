@@ -12,7 +12,7 @@ import java.util.List;
 * @author Sam Goree (2014)
 * @author Gabe Appleby (2014)
 */
-public class ComputerPlayer extends Player {
+public class ComputerPlayer implements Player {
 	Side s;
 	String name;
 	static int DEPTH = 5;
@@ -88,5 +88,11 @@ public class ComputerPlayer extends Player {
 			}
 			return beta;
 		}
+	}
+
+	@Override
+	public boolean isHuman() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

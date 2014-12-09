@@ -16,6 +16,8 @@ public interface Player {
 
 	// the player's name
 	public String getName();
+	
+	public void setName(String name);
 
 	// is the player human
 	public boolean isHuman();

@@ -10,7 +10,7 @@ import java.util.Scanner;
 * @author Gabe Appleby
 * @author Sam Goree
 */
-public class HumanPlayer extends Player {
+public class HumanPlayer implements Player {
     @Override
     public Move queryMove(Board b, LinkedList<Move> moves) {
         Scanner in = new Scanner(System.in);
@@ -32,8 +32,13 @@ public class HumanPlayer extends Player {
         return null;
     }
 
-    @Override
     public void setName(String str) {
-
+    	
     }
+
+	@Override
+	public boolean isHuman() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
