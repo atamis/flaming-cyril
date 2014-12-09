@@ -102,15 +102,4 @@ public class Board {
 	public boolean equals(Object o) {
 		return false;
 	}
-	
-	public String toString(){
-		String retval = "";
-		for(int i = 0; i < size; i++){
-			for(int k = 0; k < size; k++){
-				retval += pieceAt(convertCoord(k, i)) + " ";
-			}
-			retval += "\n";
-		}
-		return retval;
-	}
 }
