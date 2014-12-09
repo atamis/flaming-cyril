@@ -96,13 +96,13 @@ public class Checkers {
 	public static LinkedList<Move> getLegalMoves(Board b, Side p) {
 		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
-        
+
 		for (int x = 0; x < b.size; x++) { //Gabriel changed to b.size
 			for (int y = 0; y < b.size; y++) { //Gabriel changed to b.size
 
 				int coord = b.convertCoord(x, y);
-			
-				
+
+
 				if (ownsPiece(b, coord, p)) {
 					//System.out.printf("Checking piece at %d\n", coord);
 					for (int dir : getDirections(b.pieceAt(coord))) {
@@ -114,7 +114,7 @@ public class Checkers {
 						//System.out.printf("Testing: (ID:%d, Loc:%d, Dir:%d Adj: %d)\n", b.pieceAt(coord), coord, dir, adj);
 						// test if a jump can be made
 						if ((b.pieceAt(adj) != 0) && (!ownsPiece(b, adj, p))) {
-							
+
 							int adj2 = getAdjacent(b, adj, dir);
 							// index out of bounds
 							if (adj2 == -1) {
@@ -140,7 +140,7 @@ public class Checkers {
 		}
 		return result;
 	}
-			
+
 
 	// applies a move to the current board.
 	public static Board applyMove(Board b, Move m, Side s) {
@@ -176,7 +176,13 @@ public class Checkers {
 					break;
 			}
 			if (anotherTurn != 2) { //if the piece was not just promoted to king
-				anotherTurn = 1; //A piece was taken
+				for (Move mv : getLegalMoves(result, s)) {
+					if (mv.length() > 2) {
+						anotherTurn = 1;
+						break;
+					} else {
+						anotherTurn = 0;
+						
 			}
 			result.removePiece(coord);
 		}
@@ -217,22 +223,22 @@ public class Checkers {
 	}
 
 	public static void coordToString(Board b, int coord) {
-        
+
 		int x = coord % b.size;
 		int y = (int)Math.floor(coord / b.size);
         System.out.printf("%c%d", (char)(64 + y), x);
     }
-	
+
     // plays a game of checkers
     public static void play(Player player1, Player player2) {
         boolean gameover = false;
         Board board = setup();
         Player plyr = player1;
         Side current = Side.BLACK;
-        
+
         coordToString(board, board.convertCoord(3, 2));
-        
-        
+
+
         while (!gameover) {
         	board.show();
             if (!canMove(board, current)) { // not working
@@ -240,7 +246,7 @@ public class Checkers {
                 System.out.printf("%s wins!", current.opponent());
                 break;
             }
-             
+
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
 
             while (getLegalMoves(board, current).contains(m) == false) {
@@ -249,11 +255,11 @@ public class Checkers {
             	System.out.printf("Invalid move! Try again.\n");
             	m = plyr.queryMove(board, getLegalMoves(board, current));
             }
-            
+
             board = applyMove(board, m, current);
-            
-            
-            
+
+
+
 
             if (anotherTurn != 1) { //If  a piece was not taken or if the piece that took it became a king
 	            current = current.opponent();
@@ -266,6 +272,6 @@ public class Checkers {
 	        }
 	        anotherTurn = 0;
         }
-        
+
     }
 }
