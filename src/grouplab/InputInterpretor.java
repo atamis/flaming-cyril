@@ -51,10 +51,10 @@ public class InputInterpretor {
             return -1; //Return fail    
         }
         
-        System.out.println("TempX: " + tempx + "\n");
-        System.out.println("Tempy: " + tempy + "\n");
+        System.out.println("TempX: " + tempX);
+        System.out.println("Tempy: " + tempY);
         coord = b.convertCoord(tempX, tempY); //The coordinates to return
-        System.out.println("Coord: " + coord + "\n")
+        System.out.println("Coord: " + coord);
         return coord; //return the coordinates
     }
 
