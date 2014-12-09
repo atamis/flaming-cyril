@@ -182,11 +182,14 @@ public class Checkers {
 						break;
 					} else {
 						anotherTurn = 0;
+					}
+				}
 						
 			}
 			result.removePiece(coord);
 		}
 		return result;
+			
 	}
 
 	// tests if a given board state is a winning board state
