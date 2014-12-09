@@ -77,17 +77,46 @@ public class Board {
 	}
 
 	// prints the board to stdout
-		public void show() {
-			System.out.print("\n");
-			for (int x = 0; x < size; x++) {
-				for (int y = 0; y < size; y++) {
-					int index = this.convertCoord(y, x);
-					System.out.print(store.get(index) + " ");
-				}
-				System.out.print("\n");
+	//A very dumb way to do this, but it was quick and it is not really important
+	//to the logic.
+	public void show() {
+		System.out.print("\n   ");
+		int i= 0;
+		for (i = 0; i < size; i++) {
+			System.out.print(i + " ");
+		}
+		System.out.print("\n   ");
+		for (i = 0; i < size; i++) {
+			System.out.print("_ ");
+		}
+		System.out.print("\n");
+		for (int x = 0; x < size; x++) {
+			System.out.print(x + " |");
+			for (int y = 0; y < size; y++) {
+				int index = this.convertCoord(y, x);
+				System.out.print(getCharRep(store.get(index)) + " ");
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
+	}
+	//Returns a character representation of a board piece
+	private char getCharRep(int intRep) {
+		switch(intRep) {
+			case 0: //Empty space
+				return '.'; 
+			case 1: //Black pawn
+				return 'b';
+			case 2: //Black king
+				return 'B';
+			case 3: //Red pawn
+				return 'r';
+			case 4: //Red king
+				return 'R';
+			default: //Error
+				return 'E';
+		}
+	}
 	
 	// clears all pieces from the board
 	public void clear() {

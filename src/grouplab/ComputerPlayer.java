@@ -80,7 +80,6 @@ public abstract class ComputerPlayer implements Player{
 	//heuristic 
 	public abstract int heuristic(Board b);
 	
-	@Override
 	public boolean isHuman(){
 		return false;
 	}
