@@ -28,16 +28,16 @@ public class CenterWeightedCountCheckersPlayer extends ComputerPlayer {
 				double weight = b.size/2 - distance(x, y, b.size/2, b.size/2);
 				switch(b.pieceAt(b.convertCoord(x, y))) {
 				case(1):
-					score = (int) (score - pawn_value * weight);
-					break;
-				case(2):
 					score = (int) (score + pawn_value * weight);
 					break;
+				case(2):
+					score = (int) (score + king_value * weight);
+					break;
 				case(3):
-					score = (int) (score - king_value * weight);
+					score = (int) (score - pawn_value * weight);
 					break;
 				case(4):
-					score = (int) (score + king_value * weight);
+					score = (int) (score - king_value * weight);
 					break;
 				}
 			}
