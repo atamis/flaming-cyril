@@ -19,7 +19,7 @@ public class HumanPlayer implements Player {
         
         humanInput = new Scanner(System.in);  //Initialize the scanner
         inputHelper =  new InputInterpretor();  //Initialize the inputinterpretor
-        
+        System.out.println("Board:\n" + b);
         System.out.printf("Valid Moves\n");
         for (Move m : moves) {
         	System.out.printf("(%d, %d)\n", m.o, m.d);
