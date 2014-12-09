@@ -1,5 +1,8 @@
 package grouplab;
 
+import grouplab.Checkers.Side;
+import grouplab.heuristics.NaivePlayer;
+
 import java.util.Scanner;
 
 public class Game {
@@ -9,6 +12,7 @@ public class Game {
 
 
 	//Main method the game
+	@SuppressWarnings("resource")
 	public static void main(String[] args){
 
 		int playerOneSelection; //Integer selection of the type of player one
@@ -35,8 +39,12 @@ public class Game {
 		}
 
 		switch(playerOneSelection) { //Create the correct player
-			case 1: playerOne = new HumanPlayer();
-			case 2: playerOne = new NaivePlayer());
+			case 1: 
+				playerOne = new HumanPlayer();
+				break;
+			case 2: 
+				playerOne = new NaivePlayer(Side.BLACK);
+				break;
 			//case 3: p1 = new Andrew thing();
 		}
 
@@ -52,8 +60,12 @@ public class Game {
 		}
 
 		switch(playerTwoSelection) { //Create the correct player
-			case 1: playerTwo = new HumanPlayer();
-			case 2: playerTwo = new NaivePlayer();
+			case 1: 
+				playerTwo = new HumanPlayer();
+				break;
+			case 2: 
+				playerTwo = new NaivePlayer(Side.BLACK);
+				break;
 			//case 3: p1 = new Andrew thing();
 		}
 		
