@@ -96,8 +96,8 @@ public class Checkers {
 		LinkedList<Move> result = new LinkedList<Move>();
 		boolean canJump = false;
         
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
+		for (int x = 0; x < b.size; x++) { //Gabriel changed to b.size
+			for (int y = 0; y < b.size; y++) { //Gabriel changed to b.size
 
 				int coord = b.convertCoord(x, y);
 			
