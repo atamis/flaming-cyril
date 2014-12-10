@@ -182,7 +182,8 @@ public class Checkers {
 						break;
 					} else {
 						anotherTurn = 0;
-						
+					}
+				}
 			}
 			result.removePiece(coord);
 		}
