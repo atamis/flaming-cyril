@@ -6,8 +6,8 @@ import grouplab.ComputerPlayer;
 
 public class NaivePlayer extends ComputerPlayer {
 
-	public NaivePlayer(Side s) {
-		super(s);
+	public NaivePlayer(Side s, int d) {
+		super(s,d);
 	}
 
 	@Override

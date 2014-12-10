@@ -18,19 +18,26 @@ import java.util.Random;
 public class ComputerPlayer implements Player {
 	Side s;
 	String name;
-	static int DEPTH = 5;
+	int depth;
 	Random r;
 
 	public ComputerPlayer(Side s) {
 		this.s = s;
 		this.name = "DefaultComputer";
 		r = new Random();
+		depth = 5;
+	}
+	
+	public ComputerPlayer(Side s, int d){
+		this(s);
+		depth = d;
 	}
 
 	public ComputerPlayer(Side s, String name) {
 		this.s = s;
 		this.name = name;
 		r = new Random();
+		depth = 5;
 	}
 
 	public String getName() {
@@ -55,7 +62,7 @@ public class ComputerPlayer implements Player {
 		for(Move m : moves){
 			if(s == Side.BLACK){
 				//evaluate the world where we take that move
-				eval = alphabeta(Checkers.applyMove(b, m, s), DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, s);
+				eval = alphabeta(Checkers.applyMove(b, m, s), depth, Integer.MIN_VALUE, Integer.MAX_VALUE, s);
 				//if our new world is better for black than the best one found so far, keep it around
 				if(eval >= best){
 					bestMove = m;
@@ -63,7 +70,7 @@ public class ComputerPlayer implements Player {
 				}
 			}else{
 				//evaluate
-				eval = alphabeta(Checkers.applyMove(b, m, s), DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, s);
+				eval = alphabeta(Checkers.applyMove(b, m, s), depth, Integer.MIN_VALUE, Integer.MAX_VALUE, s);
 				if(eval <= best){
 					bestMove = m;
 					best = eval;

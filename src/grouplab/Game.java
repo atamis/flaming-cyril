@@ -46,24 +46,25 @@ public class Game {
 			String name = InputHelper.queryStr(input, "Enter your name: ");
 			player1.setName(name);
 		} else {
+			int depth = InputHelper.queryMenu(input, "Depth?");
 			switch (result) {
 				case 1:
-					player1 = new NaivePlayer(Side.BLACK);
+					player1 = new NaivePlayer(Side.BLACK, depth);
 					break;
 				case 2:
-					player1 = new WeightedCountCheckersPlayer(Side.BLACK, 1, 2);
+					player1 = new WeightedCountCheckersPlayer(Side.BLACK, 1, 2, depth);
 					break;
 				case 3:
-					player1 = new BetterCountCheckersPlayer(Side.BLACK);
+					player1 = new BetterCountCheckersPlayer(Side.BLACK, depth);
 					break;
 				case 4:
-					player1 = new WeightedCountCheckersPlayer(Side.BLACK, 1, 3);
+					player1 = new WeightedCountCheckersPlayer(Side.BLACK, 1, 3, depth);
 					break;
 				case 5:
-					player1 = new CenterWeightedCountCheckersPlayer(Side.BLACK, 1, 3);
+					player1 = new CenterWeightedCountCheckersPlayer(Side.BLACK, 1, 3, depth);
 					break;
 				case 6:
-					player1 = new NaiveCountCheckersPlayer(Side.BLACK);
+					player1 = new NaiveCountCheckersPlayer(Side.BLACK, depth);
 					break;
 			}
 			
@@ -76,24 +77,25 @@ public class Game {
 			String name = InputHelper.queryStr(input, "Enter your name: ");
 			player2.setName(name);
 		} else {
+			int depth = InputHelper.queryMenu(input, "Depth?");
 			switch (result) {
 			case 1:
-				player2 = new NaivePlayer(Side.RED);
+				player2 = new NaivePlayer(Side.RED, depth);
 				break;
 			case 2:
-				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 2);
+				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 2, depth);
 				break;
 			case 3:
-				player2 = new BetterCountCheckersPlayer(Side.RED);
+				player2 = new BetterCountCheckersPlayer(Side.RED, depth);
 				break;
 			case 4:
-				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 3);
+				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 3, depth);
 				break;
 			case 5:
-				player2 = new CenterWeightedCountCheckersPlayer(Side.RED, 1, 3);
+				player2 = new CenterWeightedCountCheckersPlayer(Side.RED, 1, 3, depth);
 				break;
 			case 6:
-				player2 = new NaiveCountCheckersPlayer(Side.RED);
+				player2 = new NaiveCountCheckersPlayer(Side.RED, depth);
 				break;
 			}
 			

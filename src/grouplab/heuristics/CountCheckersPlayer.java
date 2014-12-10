@@ -9,8 +9,8 @@ public class CountCheckersPlayer extends ComputerPlayer {
 	private int pawn_value;
 	private int king_value;
 
-	public CountCheckersPlayer(Side s, int pawn_value, int king_value) {
-		super(s);
+	public CountCheckersPlayer(Side s, int pawn_value, int king_value, int depth) {
+		super(s, depth);
 		this.pawn_value = pawn_value; 
 		this.king_value= king_value;
 	}

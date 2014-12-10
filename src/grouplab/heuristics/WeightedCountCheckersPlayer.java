@@ -9,8 +9,8 @@ public class WeightedCountCheckersPlayer extends ComputerPlayer {
 	private int pawn_value;
 	private int king_value;
 
-	public WeightedCountCheckersPlayer(Side s, int pawn_value, int king_value) {
-		super(s);
+	public WeightedCountCheckersPlayer(Side s, int pawn_value, int king_value, int d) {
+		super(s,d);
 		this.pawn_value = pawn_value; 
 		this.king_value= king_value;
 	}

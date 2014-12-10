@@ -4,8 +4,8 @@ import grouplab.Checkers.Side;
 
 public class NaiveCountCheckersPlayer extends CountCheckersPlayer {
 
-	public NaiveCountCheckersPlayer(Side s) {
-		super(s, 1, 1);
+	public NaiveCountCheckersPlayer(Side s, int d) {
+		super(s, 1, 1, d);
 	}
 
 }
