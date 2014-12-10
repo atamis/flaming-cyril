@@ -172,7 +172,14 @@ public class Checkers {
 				break;
 			}
 			if (anotherTurn != 2) { //if the piece was not just promoted to king
-				anotherTurn = 1; //A piece was taken
+				for (Move mv : getLegalMoves(result, s)) {
+					if (mv.length() > 2) {
+						anotherTurn = 1; // edited flag
+						break;
+					} else {
+						anotherTurn = 0;
+					}
+				}
 			}
 			result.removePiece(coord);
 		}
@@ -240,7 +247,7 @@ public class Checkers {
 			System.out.printf("Invalid move! Try again.\n");
 			m = plyr.queryMove(board, getLegalMoves(board, current));
 			}*/
-			
+
 
 
 			while (getLegalMoves(board, current).contains(m) == false) {
