@@ -181,15 +181,10 @@ public class Checkers {
 						anotherTurn = 1; //A piece was taken and another jump is possible
 						break;
 					} else {
-<<<<<<< HEAD
-						anotherTurn = 0;
-					}
-				}
-=======
+
 						anotherTurn = 0; //Another jump is not possible
 					}
 				}						
->>>>>>> e7d220ac971feb8d583423c0c84599b910bb6a58
 			}
 			result.removePiece(coord);
 		}
