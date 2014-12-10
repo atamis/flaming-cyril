@@ -123,7 +123,7 @@ public class Checkers {
 							else if (b.pieceAt(adj2) == 0) {
 								// delete any non-jumps
 								canJump = true;
-								result.add(new Move(coord, adj2));
+								result.add(new Move(coord, adj2, b.size));
 								Iterator<Move> iterator = result.iterator();
 								while(iterator.hasNext()){
 									Move m = iterator.next();
@@ -131,7 +131,7 @@ public class Checkers {
 								}
 							}
 						} else if ((b.pieceAt(adj) == 0) && (canJump == false)) {
-							result.add(new Move(coord, adj));
+							result.add(new Move(coord, adj, b.size));
 						}
 					}
 				}
@@ -200,11 +200,11 @@ public class Checkers {
 	}
 
 	// sets up the initial board state
-	public static Board setup() {
-		Board b = new Board(8);
+	public static Board setup(int size) {
+		Board b = new Board(size);
 		// Black pieces
 		for (int r=0; r < 3; r++) {
-			for (int c=0; c < 8; c++) {
+			for (int c=0; c < b.size; c++) {
 				if (r % 2 == 0) {
 					if (c % 2 != 0) b.setPiece(b.convertCoord(c, r), 1);
 				} else {
@@ -213,8 +213,8 @@ public class Checkers {
 			}
 		}
 		// Red pieces
-		for (int r=5; r < 8; r++) {
-			for (int c=0; c<8; c++) {
+		for (int r=b.size-3; r < b.size; r++) {
+			for (int c=0; c<b.size; c++) {
 				if (r % 2 == 0) {
 					if (c % 2 != 0) b.setPiece(b.convertCoord(c, r), 3);
 				} else {
@@ -233,9 +233,9 @@ public class Checkers {
     }
 
     // plays a game of checkers
-    public static void play(Player player1, Player player2) {
+    public static void play(Player player1, Player player2, int size) {
         boolean gameover = false;
-        Board board = setup();
+        Board board = setup(size);
         Player plyr = player1;
         Side current = Side.BLACK;
 
@@ -257,7 +257,7 @@ public class Checkers {
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
 
             while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % 8), (m.o / 8), (m.d & 8), (m.d /8)); ///rito delivers
+            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % board.size), (m.o / board.size), (m.d & board.size), (m.d /board.size)); ///rito delivers
             	//System.out.printf("Move: (%d, %d)\n", m.o, m.d);
             	System.out.printf("Invalid move! Try again.\n");
             	m = plyr.queryMove(board, getLegalMoves(board, current));

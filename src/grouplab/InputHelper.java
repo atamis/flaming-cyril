@@ -48,6 +48,13 @@ public class InputHelper {
             System.out.printf("Input did not match any option. Try again.\n");
         }
     }
+    
+    public static int queryMenu(Scanner in, String msg){
+    	System.out.printf("%s\n", msg);
+    	String response = in.nextLine();
+    	return Integer.parseInt(response);
+    	
+    }
 
     /*
     * gets a string from stdin

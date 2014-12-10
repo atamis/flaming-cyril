@@ -73,7 +73,7 @@ public class Board {
 	
 	// detects if a piece is on the last row
 	public boolean onLastRow(int index) {	
-		if ((index > Math.pow(size, 2) - size))
+		if ((index > size*size - size))
 			return true;
 		return false;
 	}

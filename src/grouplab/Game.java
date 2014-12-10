@@ -19,18 +19,19 @@ import java.util.Scanner;
 public class Game {
 	public static boolean silent;
 	public static void main(String[] args) {
-		silent = true;
+		//silent = true;
 		// player objects
 		Player player1 = null; Player player2 = null;
 		Scanner input = new Scanner(System.in);
 
 		LinkedList<String> controllers = new LinkedList<String>();
 		controllers.add(0, "HumanPlayer");
-		controllers.add(1, "NaivePlayer");
-		controllers.add(2, "CCPlayer");
-		controllers.add(3, "BCCPlayer");
-		controllers.add(4, "WCCPlayer");
-		controllers.add(5, "CWCCPlayer");
+		controllers.add(1, "NaivePlayer"); //naive - all moves are 0
+		controllers.add(2, "CCPlayer"); //counts checkers weighted for kings
+		controllers.add(3, "BCCPlayer"); //same as CCPlayer with set weights
+		controllers.add(4, "WCCPlayer"); //I don't know what this does - please let me know
+		controllers.add(5, "CWCCPlayer"); //I don't know what this does - please let me know
+		controllers.add(6, "NCCPlayer"); //counts checkers weighted all the same
 
 
 		// setup players
@@ -61,6 +62,9 @@ public class Game {
 				case 5:
 					player1 = new CenterWeightedCountCheckersPlayer(Side.BLACK, 1, 3);
 					break;
+				case 6:
+					player1 = new NaiveCountCheckersPlayer(Side.BLACK);
+					break;
 			}
 			
 		}
@@ -80,17 +84,22 @@ public class Game {
 				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 2);
 				break;
 			case 3:
-				player2 = new BetterCountCheckersPlayer(Side.BLACK);
+				player2 = new BetterCountCheckersPlayer(Side.RED);
 				break;
 			case 4:
-				player2 = new WeightedCountCheckersPlayer(Side.BLACK, 1, 3);
+				player2 = new WeightedCountCheckersPlayer(Side.RED, 1, 3);
 				break;
 			case 5:
-				player2 = new CenterWeightedCountCheckersPlayer(Side.BLACK, 1, 3);
+				player2 = new CenterWeightedCountCheckersPlayer(Side.RED, 1, 3);
 				break;
+			case 6:
+				player2 = new NaiveCountCheckersPlayer(Side.RED);
+				break;
+			}
+			
 		}
-		}
+		int size = InputHelper.queryMenu(input, "What should the board size be?");
 
-		Checkers.play(player1, player2);
+		Checkers.play(player1, player2, size);
 	}
 }
