@@ -1,76 +1,53 @@
 package grouplab;
 
-import grouplab.Checkers.Side;
-import grouplab.heuristics.NaivePlayer;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+* Game handles setting up all of the initial game variables and user
+* interface. No checkers logic should ever make its way in here.
+*
+* @author Nick Care (2014)
+* @author Sam Goree (2014)
+* @author Andrew Amis (2014)
+* @author Gabe Appleby (2014)
+*/
 public class Game {
+	public static void main(String[] args) {
+		// player objects
+		Player player1 = null; Player player2 = null;
+		Scanner input = new Scanner(System.in);
 
-	//I got bored of making a new variable for each function call halfway through this one, so 
-	//put your hands together for style inconsistencies (#you'rewelcome)
+		LinkedList<String> controllers = new LinkedList<String>();
+		controllers.add(0, "HumanPlayer");
+		controllers.add(1, "ComputerPlayer");
 
+		// setup players
+		int result = 0;
 
-	//Main method the game
-	@SuppressWarnings("resource")
-	public static void main(String[] args){
+		// player1
+		result = InputHelper.queryMenu(input, "Who should play on the black side?", controllers);
 
-		int playerOneSelection; //Integer selection of the type of player one
-		int playerTwoSelection; //Integer selection of the type of player Two
-		Player playerOne = null; //Player one
-		Player playerTwo = null; //Player two
-		Scanner humanInput;  //A scanner to grab input
-		InputInterpretor inputHelper; //An input interpretor to make sure the user can follow instructions
-
-		humanInput = new Scanner(System.in);  //Initialize the scanner
-        inputHelper =  new InputInterpretor();  //Initialize the inputinterpretor
-
-		System.out.println("Lets play some Checkers."); //Yeay?
-		
-		System.out.println("Would you like player one to be: 1 Human, 2 Min-Max, 3 Andrew");  //Which type of player
-		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
-		playerOneSelection = inputHelper.intToPlayer((humanInput.nextInt())); //Grab the input, then make sure its not wrong
-		
-
-		//IMPORTANT UNKOWN RESULT WITH CHARACTER, INVESTIGATE
-		while (playerOneSelection == -1) { //While the input is invalid
-			System.out.println("Invalid input"); //Tell the user that they are a moron
-			playerOneSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Try to grab a selection again
+		// if its a human player
+		if (result == 0) {
+			player1 = new HumanPlayer();
+			String name = InputHelper.queryStr(input, "Enter your name: ");
+			player1.setName(name);
+		} else {
+			//player1 = new ComputerPlayer(Side.BLACK);
 		}
 
-		switch(playerOneSelection) { //Create the correct player
-			case 1: 
-				playerOne = new HumanPlayer();
-				break;
-			case 2: 
-				playerOne = new NaivePlayer(Side.BLACK);
-				break;
-			//case 3: p1 = new Andrew thing();
+		// player2
+		result = InputHelper.queryMenu(input, "Who should play on the red side?", controllers);
+		if (result == 0) {
+			player2 = new HumanPlayer();
+			String name = InputHelper.queryStr(input, "Enter your name: ");
+			player2.setName(name);
+		} else {
+			//player2 = new ComputerPlayer();
 		}
 
-		System.out.println("Would you like player two to be: (1) Human, (2) Min-Max, (3) Andrew"); //Which type of player
-		System.out.println("Type the assigned integer of your choice."); //Hold the end user's hand
-		playerTwoSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Grab the input, then make sure its not wrong
-
-
-		//IMPORTANT UNKOWN RESULT WITH CHARACTER, INVESTIGATE
-		while (playerTwoSelection == -1) { //While the input is invalid
-			System.out.println("Invalid input"); //Tell the user that they are a moron
-			playerTwoSelection = inputHelper.intToPlayer(humanInput.nextInt()); //Try to grab a selection again
-		}
-
-		switch(playerTwoSelection) { //Create the correct player
-			case 1: 
-				playerTwo = new HumanPlayer();
-				break;
-			case 2: 
-				playerTwo = new NaivePlayer(Side.BLACK);
-				break;
-			//case 3: p1 = new Andrew thing();
-		}
-		
-		Checkers.play(playerOne, playerTwo); //Play the game
-
-
+		Checkers.play(player1, player2);
 	}
 }
