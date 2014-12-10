@@ -178,13 +178,12 @@ public class Checkers {
 			if (anotherTurn != 2) { //if the piece was not just promoted to king
 				for (Move mv : getLegalMoves(result, s)) {
 					if (mv.length() > 2) {
-						anotherTurn = 1;
+						anotherTurn = 1; //A piece was taken and another jump is possible
 						break;
 					} else {
-						anotherTurn = 0;
+						anotherTurn = 0; //Another jump is not possible
 					}
-				}
-						
+				}						
 			}
 			result.removePiece(coord);
 		}
