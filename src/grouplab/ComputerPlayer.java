@@ -41,6 +41,7 @@ public class ComputerPlayer implements Player {
 	}
 
 	//figures out the best move
+	//if a move takes a piece, it should keep the side the same
 	public Move queryMove(Board b, LinkedList<Move> moves){
 		Move bestMove = null;
 		int best = (s == Side.BLACK)?Integer.MIN_VALUE:Integer.MAX_VALUE, eval;
@@ -73,9 +74,11 @@ public class ComputerPlayer implements Player {
 		if(depth == 0 || moves.size() == 0) return heuristic(b);
 		if(s == Side.BLACK){
 			for(int i = 0; i < moves.size(); i++){
+				
 				temp = Checkers.applyMove(b, moves.get(i), s);
+				//this is the most obnoxious line of java I've ever written. I'm so proud :)
 				alpha = Math.max(alpha, alphabeta(temp, depth - 1, alpha, beta,
-				((s == Side.BLACK)? Side.BLACK : Side.RED)));
+						((moves.get(i).length() == 1)? ((s == Side.BLACK)? Side.BLACK : Side.RED):s)));
 				if(beta <= alpha) break;
 			}
 			return alpha;
@@ -83,7 +86,7 @@ public class ComputerPlayer implements Player {
 			for(int i = 0; i < moves.size(); i++){
 				temp = Checkers.applyMove(b, moves.get(i), s);
 				beta = Math.min(beta, alphabeta(temp, depth - 1, alpha, beta,
-				(s == Side.BLACK)? Side.BLACK : Side.RED));
+						((moves.get(i).length() == 1)? ((s == Side.BLACK)? Side.BLACK : Side.RED):s)));
 				if(beta <= alpha) break;
 			}
 			return beta;
