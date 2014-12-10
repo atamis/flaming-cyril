@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Board {
 	ArrayList<Integer> store;
 	public int size = 0;
+	public int stalemateCount = 0;
 	
 	// creates a standard checkers board of dimension 8
 	public Board() {

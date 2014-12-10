@@ -15,7 +15,7 @@ import java.util.LinkedList;
  */
 
 public class Checkers {
-
+	public static int STALEMATE_THRESHOLD = 49;
 	private static int anotherTurn = 0; //Keeps track of whether or not the player gets another turn
 	//0 indicates nothing of note happened and no extra turn
 	//1 indicates a piece was taken, so extra turn
@@ -144,7 +144,8 @@ public class Checkers {
 	// applies a move to the current board.
 	public static Board applyMove(Board b, Move m, Side s) {
 		Board result = new Board(b);
-
+		result.stalemateCount = b.stalemateCount + 1;
+		if(m.length() > 1) b.stalemateCount = 0;
 		if (s == Side.BLACK) {
 			if ((b.pieceAt(m.o) == 1) && (b.onLastRow(m.d) == true)) {
 				result.setPiece(m.d, 2);
@@ -243,6 +244,10 @@ public class Checkers {
 
         while (!gameover) {
         	board.show();
+        	if(board.stalemateCount > STALEMATE_THRESHOLD){
+        		System.out.println("Stalemate. You both suck.");
+        		gameover = true;
+        	}
             if (!canMove(board, current)) { // not working
                 gameover = true;
                 System.out.printf("%s wins!", current.opponent());
