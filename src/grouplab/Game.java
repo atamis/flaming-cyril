@@ -1,12 +1,7 @@
 package grouplab;
 
-<<<<<<< HEAD
-import grouplab.Checkers.Side;
-import grouplab.heuristics.NaivePlayer;
 
-=======
 import java.util.LinkedList;
->>>>>>> iteration2
 import java.util.Scanner;
 
 /**

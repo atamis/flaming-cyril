@@ -93,7 +93,6 @@ public class ComputerPlayer implements Player {
 		}
 	}
 
-	@Override
 	public boolean isHuman() {
 		// TODO Auto-generated method stub
 		return false;

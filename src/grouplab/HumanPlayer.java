@@ -11,7 +11,6 @@ import java.util.Scanner;
 * @author Sam Goree
 */
 public class HumanPlayer implements Player {
-    @Override
     public Move queryMove(Board b, LinkedList<Move> moves) {
         Scanner in = new Scanner(System.in);
 
@@ -27,7 +26,6 @@ public class HumanPlayer implements Player {
         return moves.get(mid);
     }
 
-    @Override
     public String getName() {
         return null;
     }
