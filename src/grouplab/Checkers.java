@@ -63,9 +63,9 @@ public class Checkers {
 
 	// gets tile in specified direction
 	public static int getAdjacent(Board b, int index, int direction) {
-		if ((index < 0) || (index > Math.pow(b.size, 2))) {
-			System.out.printf("Index out of bounds: %d\n", direction);
-			System.exit(1);
+		if ((index < 0) || (index >= Math.pow(b.size, 2))) {
+			//System.out.printf("Index out of bounds: %d\n", index);
+			return -1;
 		}
 		switch(direction) {
 			// north west
@@ -121,7 +121,6 @@ public class Checkers {
 								continue;
 							}
 							else if (b.pieceAt(adj2) == 0) {
-								System.out.printf("Found jump/n");
 								// delete any non-jumps
 								canJump = true;
 								result.add(new Move(coord, adj2));
@@ -169,9 +168,10 @@ public class Checkers {
 		// delete the piece if a jump
 		int coord = 0;
 		if (m.length() > 1) {
-			System.out.printf("Removing piece from jump\n");
+			//System.out.printf("Removing piece from jump\n");
 			for (int i=0; i<4; i++) {
 				coord = getAdjacent(b, m.o, i);
+				if(coord == -1) continue;
 				if (getAdjacent(b, coord, i) == m.d)
 					break;
 			}
@@ -228,7 +228,7 @@ public class Checkers {
 
 		int x = coord % b.size;
 		int y = (int)Math.floor(coord / b.size);
-        System.out.printf("%c%d", (char)(64 + y), x);
+        //System.out.printf("%c%d", (char)(64 + y), x);
     }
 
     // plays a game of checkers

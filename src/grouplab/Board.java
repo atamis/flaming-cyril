@@ -45,6 +45,7 @@ public class Board {
 	}
 	// get the id of a piece at location index
 	public int pieceAt(int index) {
+		if(index >= size*size || index < 0) return -1;
 		return store.get(index);
 	}
 	
@@ -80,6 +81,7 @@ public class Board {
 	//A very dumb way to do this, but it was quick and it is not really important
 	//to the logic.
 	public void show() {
+		if(Game.silent) return;
 		System.out.print("\n   ");
 		int i= 0;
 		for (i = 0; i < size; i++) {
@@ -91,7 +93,7 @@ public class Board {
 		}
 		System.out.print("\n");
 		for (int x = 0; x < size; x++) {
-			System.out.print(x + " |");
+			System.out.print((char)(x + 'A') + " |");
 			for (int y = 0; y < size; y++) {
 				int index = this.convertCoord(y, x);
 				System.out.print(getCharRep(store.get(index)) + " ");

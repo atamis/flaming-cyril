@@ -23,9 +23,9 @@ public class InputHelper {
         System.out.printf("%s\n", msg); // print out the message to stdout
 
         while (true) {
-            int idx = 1;
+            int idx = 0;
             for (String option : options) {
-                System.out.printf("%d\t%s\n", idx, option);
+                System.out.printf("\t%d. %s\n", idx, option);
                 idx++;
             }
 
@@ -53,7 +53,7 @@ public class InputHelper {
     * gets a string from stdin
     */
     public static String queryStr(Scanner in, String msg) {
-        System.out.printf("%s\n", msg);
+        System.out.printf("%s", msg);
 
         String response = in.nextLine();
         if (response.length() == 0) {
@@ -85,6 +85,6 @@ public class InputHelper {
     public static String coordToString(Board b, int coord) {
         int x = coord % b.size;
         int y = (int)Math.floor(coord / b.size);
-        return (char)(63+y) + Integer.toString(x);
+        return (char)('A'+y) + Integer.toString(x);
     }
 }

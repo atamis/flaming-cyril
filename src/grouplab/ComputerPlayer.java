@@ -1,8 +1,11 @@
 package grouplab;
 
 import grouplab.Checkers.Side;
+
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
 * Interface that should be implemented by all non-human players
@@ -16,15 +19,18 @@ public class ComputerPlayer implements Player {
 	Side s;
 	String name;
 	static int DEPTH = 5;
+	Random r;
 
 	public ComputerPlayer(Side s) {
 		this.s = s;
 		this.name = "DefaultComputer";
+		r = new Random();
 	}
 
 	public ComputerPlayer(Side s, String name) {
 		this.s = s;
 		this.name = name;
+		r = new Random();
 	}
 
 	public String getName() {
@@ -70,11 +76,12 @@ public class ComputerPlayer implements Player {
 	private int alphabeta(Board b, int depth, int alpha, int beta, Side s){
 		Board temp;
 		List<Move> moves = Checkers.getLegalMoves(b, s);
+		Collections.shuffle(moves, r);
+		//moves.add(moves.remove(0));
 		//base case
 		if(depth == 0 || moves.size() == 0) return heuristic(b);
 		if(s == Side.BLACK){
 			for(int i = 0; i < moves.size(); i++){
-
 				temp = Checkers.applyMove(b, moves.get(i), s);
 				//this is the most obnoxious line of java I've ever written. I'm so proud :)
 				alpha = Math.max(alpha, alphabeta(temp, depth - 1, alpha, beta,
