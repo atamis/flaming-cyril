@@ -20,6 +20,8 @@ public class ComputerPlayer implements Player {
 	String name;
 	int depth;
 	Random r;
+	
+	static boolean DEBUG = false;
 
 	public ComputerPlayer(Side s) {
 		this.s = s;
@@ -94,8 +96,12 @@ public class ComputerPlayer implements Player {
 				if(temp.stalemateCount > Checkers.STALEMATE_THRESHOLD) return Integer.MIN_VALUE;
 				//this is the most obnoxious line of java I've ever written. I'm so proud :)
 				alpha = Math.max(alpha, alphabeta(temp, depth - 1, alpha, beta,
-						((moves.get(i).length() == 1)? ((s == Side.BLACK)? Side.BLACK : Side.RED):s)));
-				if(beta <= alpha) break;
+						((moves.get(i).length() == 1)? s.opponent() : s)));
+				//System.out.println("depth: " + depth + "side: " + s + "alpha: " + alpha + " beta: " + beta);
+				if(beta <= alpha) {
+					if(DEBUG) System.out.println("alphabeta, bitch!");
+					break;
+				}
 			}
 			return alpha;
 		}else{
@@ -103,8 +109,11 @@ public class ComputerPlayer implements Player {
 				temp = Checkers.applyMove(b, moves.get(i), s);
 				if(temp.stalemateCount > Checkers.STALEMATE_THRESHOLD) return Integer.MAX_VALUE;
 				beta = Math.min(beta, alphabeta(temp, depth - 1, alpha, beta,
-						((moves.get(i).length() == 1)? ((s == Side.BLACK)? Side.BLACK : Side.RED):s)));
-				if(beta <= alpha) break;
+						((moves.get(i).length() == 1)? s.opponent() : s)));
+				if(beta <= alpha) {
+					if(DEBUG)System.out.println("alphabeta, bitch!");
+					break;
+				}
 			}
 			return beta;
 		}
