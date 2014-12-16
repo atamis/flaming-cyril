@@ -98,6 +98,7 @@ public class Board {
 			for (int y = 0; y < size; y++) {
 				int index = this.convertCoord(y, x);
 				System.out.print(getCharRep(store.get(index)) + " ");
+				//System.out.println(index);
 			}
 			System.out.print("\n");
 		}

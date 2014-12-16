@@ -195,8 +195,8 @@ public class Checkers {
 	// tests if a given board state is a winning board state
 	public static boolean canMove(Board b, Side s) {
 		if (getLegalMoves(b, s).size() > 0)
-			return true;
-		return false;
+			return (Game.GAME_MODE == 0);
+		return (Game.GAME_MODE == 0);
 	}
 
 	// sets up the initial board state
@@ -257,7 +257,7 @@ public class Checkers {
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
 
             while (getLegalMoves(board, current).contains(m) == false) {
-            	System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % board.size), (m.o / board.size), (m.d & board.size), (m.d /board.size)); ///rito delivers
+            	//System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % board.size), (m.o / board.size), (m.d & board.size), (m.d /board.size)); ///rito delivers
             	//System.out.printf("Move: (%d, %d)\n", m.o, m.d);
             	System.out.printf("Invalid move! Try again.\n");
             	m = plyr.queryMove(board, getLegalMoves(board, current));

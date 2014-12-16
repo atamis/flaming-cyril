@@ -95,7 +95,7 @@ public class ComputerPlayer implements Player {
 				temp = Checkers.applyMove(b, moves.get(i), s);
 				if(temp.stalemateCount > Checkers.STALEMATE_THRESHOLD) return Integer.MIN_VALUE;
 				//this is the most obnoxious line of java I've ever written. I'm so proud :)
-				alpha = Math.max(alpha, alphabeta(temp, depth - 1, alpha, beta,
+				alpha = Math.max(alpha, (-(Game.GAME_MODE-1)) * alphabeta(temp, depth - 1, alpha, beta,
 						((moves.get(i).length() == 1)? s.opponent() : s)));
 				//System.out.println("depth: " + depth + "side: " + s + "alpha: " + alpha + " beta: " + beta);
 				if(beta <= alpha) {
@@ -108,7 +108,7 @@ public class ComputerPlayer implements Player {
 			for(int i = 0; i < moves.size(); i++){
 				temp = Checkers.applyMove(b, moves.get(i), s);
 				if(temp.stalemateCount > Checkers.STALEMATE_THRESHOLD) return Integer.MAX_VALUE;
-				beta = Math.min(beta, alphabeta(temp, depth - 1, alpha, beta,
+				beta = Math.min(beta, (-(Game.GAME_MODE-1)) * alphabeta(temp, depth - 1, alpha, beta,
 						((moves.get(i).length() == 1)? s.opponent() : s)));
 				if(beta <= alpha) {
 					if(DEBUG)System.out.println("alphabeta, bitch!");

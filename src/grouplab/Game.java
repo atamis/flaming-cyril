@@ -17,6 +17,7 @@ import java.util.Scanner;
 * @author Gabe Appleby (2014)
 */
 public class Game {
+	public static int GAME_MODE = 0; //0 is checkers, 1 is suicide checkers
 	public static boolean silent;
 	public static void main(String[] args) {
 		//silent = true;
