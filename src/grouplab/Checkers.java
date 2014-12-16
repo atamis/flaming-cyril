@@ -238,9 +238,11 @@ public class Checkers {
         Board board = setup(size);
         Player plyr = player1;
         Side current = Side.BLACK;
-
+        
         coordToString(board, board.convertCoord(3, 2));
-
+        
+        long startTime = System.currentTimeMillis(); //Keeps track of when this game began
+        int movesTaken = 0; //Keeps track of the total number of moves taken;
 
         while (!gameover) {
         	board.show();
@@ -255,6 +257,7 @@ public class Checkers {
             }
 
             Move m = plyr.queryMove(board, getLegalMoves(board, current));
+            
 
             while (getLegalMoves(board, current).contains(m) == false) {
             	//System.out.printf("Move: O:(%d, %d), D:(%d, %d)(\n", (m.o % board.size), (m.o / board.size), (m.d & board.size), (m.d /board.size)); ///rito delivers
@@ -264,7 +267,7 @@ public class Checkers {
             }
 
             board = applyMove(board, m, current);
-
+            movesTaken++; //Increment moves taken
 
 
 
@@ -279,6 +282,12 @@ public class Checkers {
 	        }
 	        anotherTurn = 0;
         }
+        long endTime = System.currentTimeMillis(); //Keeps track of when a game ended
+        long totalTime = endTime - startTime; //Keeps track of the amount of time a game took
+        
+        System.out.println("This game took: " + totalTime + ".\n"); //Prints out the time a game took
+        System.out.println("The number of moves taken were: " + movesTaken + ".\n"); //Prints out the time a game took
+        
 
     }
 }
