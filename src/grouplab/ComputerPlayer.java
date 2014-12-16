@@ -15,9 +15,9 @@ import java.util.Random;
 * @author Sam Goree (2014)
 * @author Gabe Appleby (2014)
 */
-public class ComputerPlayer implements Player {
+public abstract class ComputerPlayer implements Player {
 	Side s;
-	String name;
+	protected String name;
 	int depth;
 	Random r;
 	
@@ -51,9 +51,7 @@ public class ComputerPlayer implements Player {
 	}
 
 	//heuristic
-	public int heuristic(Board b) {
-		return 0;
-	}
+	public abstract int heuristic(Board b);
 
 	//figures out the best move
 	//if a move takes a piece, it should keep the side the same

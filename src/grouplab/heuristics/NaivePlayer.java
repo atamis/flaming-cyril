@@ -8,6 +8,7 @@ public class NaivePlayer extends ComputerPlayer {
 
 	public NaivePlayer(Side s, int d) {
 		super(s,d);
+		this.name = "NaivePlayer";
 	}
 
 	@Override

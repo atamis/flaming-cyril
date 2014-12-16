@@ -18,6 +18,7 @@ public class CenterWeightedCountCheckersPlayer extends ComputerPlayer {
 		super(s, d);
 		this.pawn_value = pawn_value; 
 		this.king_value= king_value;
+		this.name = "CWCCPlayer";
 	}
 
 	@Override

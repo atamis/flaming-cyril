@@ -13,6 +13,7 @@ public class CountCheckersPlayer extends ComputerPlayer {
 		super(s, depth);
 		this.pawn_value = pawn_value; 
 		this.king_value= king_value;
+		this.name = "CCPlayer";
 	}
 
 	@Override
