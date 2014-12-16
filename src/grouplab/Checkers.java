@@ -196,7 +196,7 @@ public class Checkers {
 	public static boolean canMove(Board b, Side s) {
 		if (getLegalMoves(b, s).size() > 0)
 			return (Game.GAME_MODE == 0);
-		return (Game.GAME_MODE == 1);
+		return (Game.GAME_MODE == 0);
 	}
 
 	// sets up the initial board state
