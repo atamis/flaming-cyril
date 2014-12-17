@@ -255,6 +255,7 @@ public class Checkers {
             if (!canMove(board, current)) { // not working
                 gameover = true;
                 System.out.printf("%s wins! ", current.opponent());
+                
                 break;
             }
 
@@ -287,7 +288,7 @@ public class Checkers {
         long endTime = System.currentTimeMillis(); //Keeps track of when a game ended
         long totalTime = endTime - startTime; //Keeps track of the amount of time a game took
         //NumberFormat formatter = new DecimalFormat("#0.00000");
-        System.out.println("This game took: " + totalTime/1000.0 + " seconds, in " + movesTaken + " moves.\n"); //Prints out the time a game took        
+        System.out.print("This game took: " + totalTime/1000.0 + " seconds, in " + movesTaken + " moves. "); //Prints out the time a game took        
 
     }
 }
