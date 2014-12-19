@@ -26,8 +26,8 @@ public class Game {
 	public static boolean silent;
 	
 	public static void main(String[] args) {
-		boolean bulkTest = true;
-		if (bulkTest == true) {
+		boolean op_nerf_plox = false;
+		if (op_nerf_plox == true) {
 			silent = true;
 			LinkedList<ComputerPlayer> playersB = new LinkedList<ComputerPlayer>();
 			int depth = 6;
